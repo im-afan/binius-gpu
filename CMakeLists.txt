@@ -1,4 +1,7 @@
 # Version stuff
+
+set(CMAKE_CUDA_COMPILER /usr/local/cuda-12.6/bin/nvcc)
+
 cmake_minimum_required(VERSION 3.27)
 project(ulvt_gpu VERSION 0.1 LANGUAGES CXX CUDA)
 
@@ -7,10 +10,14 @@ set(CMAKE_CUDA_STANDARD 20)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+
+message(STATUS "CMAKE_CUDA_COMPILER = ${CMAKE_CUDA_COMPILER}")
+message(STATUS "CMAKE_CUDA_COMPILER_ID = ${CMAKE_CUDA_COMPILER_ID}")
+message(STATUS "CMAKE_CUDA_COMPILER_VERSION = ${CMAKE_CUDA_COMPILER_VERSION}")
+
 # Add 3rdparty stuff
 add_subdirectory(third-party/Catch2)
 add_subdirectory(third-party/nvbench)
-
 
 # sources and headers
 set(ntt_lib_srcs "./src/ulvt/ntt/nttconf.cu")

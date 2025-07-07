@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/intern-04/binius-gpu/build/_deps/fmt-subbuild/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

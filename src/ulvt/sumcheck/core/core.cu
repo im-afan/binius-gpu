@@ -6,7 +6,7 @@
 #include "../utils/constants.hpp"
 #include "core.cuh"
 
-__host__ __device__ void evaluate_composition_on_batch_row(
+__host__ __device__ void evaluate_composition_on_batch_row( // after folding, calculate the claimed sum over hypercube by multiplying the individual multilinear evaluations
 	const uint32_t* first_batch_of_row,
 	uint32_t* batch_composition_destination,
 	const uint32_t composition_size,
@@ -15,18 +15,21 @@ __host__ __device__ void evaluate_composition_on_batch_row(
 	memcpy(batch_composition_destination, first_batch_of_row, BITS_WIDTH * sizeof(uint32_t));
 
 	for (int operand_in_composition = 1; operand_in_composition < composition_size; ++operand_in_composition) {
+		// next polynomial in the composition
+		// makes sense because the INTS_PER_VALUE still represents the size of all the batches
 		const uint32_t* nth_batch_of_row =
-			first_batch_of_row + operand_in_composition * original_evals_per_col * INTS_PER_VALUE;
-
+			first_batch_of_row + operand_in_composition * original_evals_per_col * INTS_PER_VALUE; // move forward to the next polynomial in the composition
+		
+		// multiply
 		multiply_unrolled<TOWER_HEIGHT>(batch_composition_destination, nth_batch_of_row, batch_composition_destination);
 	}
 }
 
-__host__ __device__ void fold_batch(
+__host__ __device__ void fold_batch( // fold polynomial table in half by plugging in random challenge point
 	const uint32_t lower_batch[BITS_WIDTH],
 	const uint32_t upper_batch[BITS_WIDTH],
 	uint32_t dst_batch[BITS_WIDTH],
-	const uint32_t coefficient[BITS_WIDTH],
+	const uint32_t coefficient[BITS_WIDTH], // coef is actually just 1 value (r_i) copied over; this makes it so that bitslicing works natively with multiplciations here
 	const bool is_interpolation
 ) {
 	uint32_t xor_of_halves[BITS_WIDTH];
@@ -81,7 +84,7 @@ void fold_small(
 	}
 }
 
-__host__ __device__ void compute_sum(
+__host__ __device__ void compute_sum( // sum the compositions to obtain Si(Xi) or the claimed sum
 	uint32_t sum[INTS_PER_VALUE],
 	uint32_t bitsliced_batch[BITS_WIDTH],
 	const uint32_t num_eval_points_being_summed_unpadded

@@ -1,0 +1,1 @@
+rapids-cmake [fmt]: applied diff no_debug_warnings.diff to fix issue: 'No warnings during debug builds [https://github.com/fmtlib/fmt/issues/3351]'

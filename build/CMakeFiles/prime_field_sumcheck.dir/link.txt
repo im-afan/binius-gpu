@@ -1,0 +1,2 @@
+/usr/bin/ar qc libprime_field_sumcheck.a CMakeFiles/prime_field_sumcheck.dir/src/ulvt/prime_field_sumcheck/core/kernels.cu.o
+/usr/bin/ranlib libprime_field_sumcheck.a

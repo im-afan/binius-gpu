@@ -1,0 +1,3 @@
+include("/home/intern-04/binius-gpu/build/cmake/CPM_0.38.5.cmake")
+CPMAddPackage("NAME;fmt;VERSION;9.1.0;OPTIONS;BUILD_SHARED_LIBS OFF;GIT_REPOSITORY;https://github.com/fmtlib/fmt.git;GIT_TAG;9.1.0;GIT_SHALLOW;ON;PATCH_COMMAND;/home/intern-04/cmake-4.0.3-linux-x86_64/bin/cmake;-P;/home/intern-04/binius-gpu/build/rapids-cmake/patches/fmt/patch.cmake;EXCLUDE_FROM_ALL;OFF;OPTIONS;FMT_INSTALL OFF;CMAKE_POSITION_INDEPENDENT_CODE ON")
+set(fmt_FOUND TRUE)

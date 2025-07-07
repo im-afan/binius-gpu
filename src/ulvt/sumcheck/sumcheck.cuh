@@ -157,7 +157,10 @@ public:
 
 		uint32_t *gpu_multilinear_products, *gpu_folded_products_sums;
 
-		if (num_eval_points_per_multilinear_padded == 32) {
+		if (num_eval_points_per_multilinear_padded == 32) { // this is constructing Si(Xi) i think?
+															// ok so basically they aren't actually construcing S
+															// they are evaluating it at a few points and sending those results to the verifier
+															// and letting the verifier interpolate Si using those points
 			// If the number of evals fits in a single batch, use the CPU
 
 			// 1. Calculate the products of the multilinear evaluations
@@ -167,7 +170,8 @@ public:
 
 			for (uint32_t interpolation_point = 0; interpolation_point < INTERPOLATION_POINTS; ++interpolation_point) {
 				uint32_t folded_at_point[BITS_WIDTH * COMPOSITION_SIZE] = {0};
-
+				
+				// fold for the ith interpolation point
 				fold_list_halves(
 					cpu_multilinear_evaluations,
 					folded_at_point,
@@ -177,15 +181,17 @@ public:
 					32,
 					COMPOSITION_SIZE
 				);
-
+				
+				// calculate products (composition) for the same term in each multilinear polynomial
 				evaluate_composition_on_batch_row(
 					folded_at_point, folded_products_sums + (BITS_WIDTH * interpolation_point), COMPOSITION_SIZE, 32
 				);
 			}
 
-			compute_sum(sum, multilinear_products, num_eval_points_per_multilinear_unpadded);
+			compute_sum(sum, multilinear_products, num_eval_points_per_multilinear_unpadded); // claimed sum
 
 			for (int interpolation_point = 0; interpolation_point < INTERPOLATION_POINTS; ++interpolation_point) {
+				// sum up the products for each interpolation point and save it
 				compute_sum(
 					points + interpolation_point * INTS_PER_VALUE,
 					folded_products_sums +
@@ -245,7 +251,7 @@ public:
 		}
 	};
 
-	void move_to_next_round(const std::array<uint32_t, INTS_PER_VALUE> &challenge_span) {
+	void move_to_next_round(const std::array<uint32_t, INTS_PER_VALUE> &challenge_span) { // by folding polynomial using challenge point
 		const uint32_t *challenge = challenge_span.data();
 
 		// Take a_i(x_i,...,x_n) and create a_(i+1)(x_(i+1),...,x_n) = a_i(challenge,x_(i+1),...,x_n)

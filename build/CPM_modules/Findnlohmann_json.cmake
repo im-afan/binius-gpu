@@ -1,0 +1,3 @@
+include("/home/intern-04/binius-gpu/build/cmake/CPM_0.38.5.cmake")
+CPMAddPackage("NAME;nlohmann_json;VERSION;3.11.3;URL;https://github.com/nlohmann/json/releases/download/v3.11.3/include.zip;URL_HASH;SHA256=a22461d13119ac5c78f205d3df1db13403e58ce1bb1794edc9313677313f4a9d;PATCH_COMMAND;/home/intern-04/cmake-4.0.3-linux-x86_64/bin/cmake;-D;CUDA_VERSION=12.6.68;-D;CXX_VERSION=12.3.0;-D;CXX_ID=GNU;-P;/home/intern-04/binius-gpu/third-party/nvbench/cmake/patches/json_unordered_map_ice.cmake")
+set(nlohmann_json_FOUND TRUE)

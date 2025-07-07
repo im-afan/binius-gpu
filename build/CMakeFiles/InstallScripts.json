@@ -1,0 +1,14 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/intern-04/binius-gpu/build/cmake_install.cmake",
+		"/home/intern-04/binius-gpu/build/third-party/Catch2/cmake_install.cmake",
+		"/home/intern-04/binius-gpu/build/third-party/Catch2/src/cmake_install.cmake",
+		"/home/intern-04/binius-gpu/build/third-party/nvbench/cmake_install.cmake",
+		"/home/intern-04/binius-gpu/build/_deps/rapids-cmake-build/cmake_install.cmake",
+		"/home/intern-04/binius-gpu/build/_deps/fmt-build/cmake_install.cmake",
+		"/home/intern-04/binius-gpu/build/third-party/nvbench/nvbench/cmake_install.cmake",
+		"/home/intern-04/binius-gpu/build/third-party/nvbench/exec/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

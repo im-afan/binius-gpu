@@ -6,6 +6,8 @@
 #include "../utils/constants.hpp"
 #include "core.cuh"
 
+
+// folding to move on to the next round
 __global__ void fold_large_list_halves(
 	uint32_t* source,
 	uint32_t* destination,

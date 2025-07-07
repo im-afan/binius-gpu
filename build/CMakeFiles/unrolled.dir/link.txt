@@ -1,0 +1,2 @@
+/usr/bin/ar qc libunrolled.a CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled2.cu.o CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled5.cu.o CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled6.cu.o CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled7.cu.o
+/usr/bin/ranlib libunrolled.a

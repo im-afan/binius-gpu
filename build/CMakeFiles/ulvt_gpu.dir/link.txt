@@ -1,0 +1,2 @@
+/usr/bin/ar qc libulvt_gpu.a CMakeFiles/ulvt_gpu.dir/src/ulvt/ntt/nttconf.cu.o CMakeFiles/ulvt_gpu.dir/src/ulvt/utils/common.cu.o CMakeFiles/ulvt_gpu.dir/src/ulvt/finite_fields/tests/profiling/kernels/babybear_repeat.cu.o CMakeFiles/ulvt_gpu.dir/src/ulvt/finite_fields/tests/profiling/kernels/bitsliced_repeat.cu.o CMakeFiles/ulvt_gpu.dir/src/ulvt/finite_fields/circuit_generator/utils/utils.cpp.o
+/usr/bin/ranlib libulvt_gpu.a

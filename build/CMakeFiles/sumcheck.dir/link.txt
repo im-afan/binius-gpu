@@ -1,0 +1,2 @@
+/usr/bin/ar qc libsumcheck.a CMakeFiles/sumcheck.dir/src/ulvt/sumcheck/core/core.cu.o CMakeFiles/sumcheck.dir/src/ulvt/sumcheck/core/kernels.cu.o
+/usr/bin/ranlib libsumcheck.a

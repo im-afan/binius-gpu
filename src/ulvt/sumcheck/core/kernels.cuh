@@ -1,9 +1,10 @@
 #include <cstdint>
 
 #include "../utils/constants.hpp"
+#include <nvtx3/nvToolsExt.h>
 
 template <uint32_t INTERPOLATION_POINTS, uint32_t COMPOSITION_SIZE, uint32_t EVALS_PER_MULTILINEAR>
-__global__ void compute_compositions( // evaluates Si(Xi) at multiple points
+__global__ void compute_compositions( // evaluates Si(Xi) at multiple points and gets the claimed sum
 	// organized by multiple 32x128 batches for P1, followed by many 32x128 for P2, etc
 	const uint32_t* multilinear_evaluations, // d x 2^n table representing the 3 multiplied hypercubes
 
@@ -11,7 +12,9 @@ __global__ void compute_compositions( // evaluates Si(Xi) at multiple points
 	// outside of this function, all the elements of this will get summed up in the end to get the claimed value for Si(Xi) 
 	uint32_t* multilinear_products_sums, 
 
-	// 
+	// 32x128xCOMPOSITION_SIZE representing folded sums for different interpolation points 
+	// same thing as multilinear_products_sums, this is batched in 32 different values but will get summed
+	// up to a single binary tower element later
 	uint32_t* folded_products_sums,
 
 	// interpolation points we are plugging in to find Si(Xi)
@@ -21,10 +24,12 @@ __global__ void compute_compositions( // evaluates Si(Xi) at multiple points
 	// the same point is repeated 32 times to allow for batch multiplication
 	const uint32_t coefficients[INTERPOLATION_POINTS * BITS_WIDTH],
 
+	// number of batches in a single multilinear polynomial table
 	const uint32_t num_batch_rows,
 	const uint32_t active_threads,
 	const uint32_t active_threads_folded
 ) {
+	//printf("here\n");
 	const uint32_t tid = threadIdx.x + blockIdx.x * blockDim.x;  // start the batch index off at the tid
 
 	uint32_t folded_products_sums_this_thread[INTERPOLATION_POINTS * BITS_WIDTH];
@@ -39,7 +44,7 @@ __global__ void compute_compositions( // evaluates Si(Xi) at multiple points
 		uint32_t this_multilinear_product[BITS_WIDTH];
 
 		// finding the claimed sum P(000) + P(001) + P(010) + ... + P(110) + P(111)
-		evaluate_composition_on_batch_row(
+		evaluate_composition_on_batch_row( 
 			multilinear_evaluations + BITS_WIDTH * row_idx, // the row_idx'th batch 
 			this_multilinear_product, // destination for p1p2p3...pd
 			COMPOSITION_SIZE, // =d
@@ -76,7 +81,7 @@ __global__ void compute_compositions( // evaluates Si(Xi) at multiple points
 				// for each interpolation point and multilinear polynomial, fold the upper batch with the lower batch to find Si(Xi) where Xi is the ith interpolation point
 				// and save the fold result to folded_batch_row
 				for (int interpolation_point = 0; interpolation_point < INTERPOLATION_POINTS; ++interpolation_point) {
-					fold_batch(
+					fold_batch( // 3%
 						lower_batch,
 						upper_batch,
 						// folded_batch_row ptr + batch size * hypercube idx * num interpolation points + batch size * interpolation point idx
@@ -96,7 +101,7 @@ __global__ void compute_compositions( // evaluates Si(Xi) at multiple points
 				uint32_t this_interpolation_point_product_batch[BITS_WIDTH];
 				
 				// find the product of each hypercube batch. (p1p2...pd) 
-				evaluate_composition_on_batch_row(
+				evaluate_composition_on_batch_row( // THIS IS THE BIGGEST SLOWDOWN
 					// start at the 1st batch in the fold result for that point
 					folded_batch_row + BITS_WIDTH * interpolation_point, // starting batch
 					this_interpolation_point_product_batch, // destination 
@@ -125,7 +130,7 @@ __global__ void compute_compositions( // evaluates Si(Xi) at multiple points
 			// we are changing an array shared across all threads so we have to be careful
 			// and use atomic operations
 			// because of bitslicing it's just a bitwise XOR for each position
-			atomicXor(multilinear_products_sums + i, multilinear_products_sums_this_thread[i]);
+			atomicXor(multilinear_products_sums + i, multilinear_products_sums_this_thread[i]); // TODO instead of atomic xor may speedup by a few %
 		}
 	}
 

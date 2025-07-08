@@ -5,9 +5,10 @@
 #include "../../utils/bitslicing.cuh"
 #include "../utils/constants.hpp"
 #include "core.cuh"
+#include <nvtx3/nvToolsExt.h>
 
 __host__ __device__ void evaluate_composition_on_batch_row( // after folding, calculate the claimed sum over hypercube by multiplying the individual multilinear evaluations
-	const uint32_t* first_batch_of_row,
+	const uint32_t* first_batch_of_row, // THIS IS THE BIGGEST OPTIMIZATION OPPORTUNITY
 	uint32_t* batch_composition_destination,
 	const uint32_t composition_size,
 	const uint32_t original_evals_per_col
@@ -32,6 +33,8 @@ __host__ __device__ void fold_batch( // fold polynomial table in half by pluggin
 	const uint32_t coefficient[BITS_WIDTH], // coef is actually just 1 value (r_i) copied over; this makes it so that bitslicing works natively with multiplciations here
 	const bool is_interpolation
 ) {
+	//printf("here\n");
+
 	uint32_t xor_of_halves[BITS_WIDTH];
 
 	for (int i = 0; i < BITS_WIDTH; ++i) {

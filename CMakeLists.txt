@@ -30,6 +30,8 @@ file(GLOB circuit_util_headers "./src/ulvt/finite_fields/circuit_generator/utils
 file(GLOB unrolled_srcs "./src/ulvt/finite_fields/circuit_generator/unrolled/*.cu")
 file(GLOB unrolled_headers "./src/ulvt/finite_fields/circuit_generator/unrolled/*.cuh")
 
+#file(GLOB rolled_srcs "./src/ulvt/finite_fields/circuit_generator/unrolled/.cu")
+
 add_library(unrolled STATIC ${unrolled_srcs} ${unrolled_headers})
 set_target_properties(unrolled PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
 

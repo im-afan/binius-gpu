@@ -2,6 +2,7 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include "../circuit_generator/unrolled/binary_tower_unrolled.cuh"
+#include "../circuit_generator/unrolled/binary_tower_rolled.cuh"
 #include "../../utils/bitslicing.cuh"
 #include "ulvt/finite_fields/binary_tower.cuh"
 #include "ulvt/finite_fields/binary_tower_simd.cuh"

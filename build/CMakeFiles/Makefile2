@@ -277,12 +277,12 @@ third-party/nvbench/nvbench/clean: third-party/nvbench/nvbench/CMakeFiles/nvbenc
 CMakeFiles/unrolled.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/unrolled.dir/build.make CMakeFiles/unrolled.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/unrolled.dir/build.make CMakeFiles/unrolled.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=98,99,100 "Built target unrolled"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=97,98,99,100 "Built target unrolled"
 .PHONY : CMakeFiles/unrolled.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/unrolled.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/unrolled.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 0
 .PHONY : CMakeFiles/unrolled.dir/rule
@@ -294,7 +294,7 @@ unrolled: CMakeFiles/unrolled.dir/rule
 # codegen rule for target.
 CMakeFiles/unrolled.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/unrolled.dir/build.make CMakeFiles/unrolled.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=98,99,100 "Finished codegen for target unrolled"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=97,98,99,100 "Finished codegen for target unrolled"
 .PHONY : CMakeFiles/unrolled.dir/codegen
 
 # clean rule for target.
@@ -309,7 +309,7 @@ CMakeFiles/unrolled.dir/clean:
 CMakeFiles/sumcheck.dir/all: CMakeFiles/unrolled.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sumcheck.dir/build.make CMakeFiles/sumcheck.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sumcheck.dir/build.make CMakeFiles/sumcheck.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=88,89 "Built target sumcheck"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=88 "Built target sumcheck"
 .PHONY : CMakeFiles/sumcheck.dir/all
 
 # Build rule for subdir invocation for target.
@@ -326,7 +326,7 @@ sumcheck: CMakeFiles/sumcheck.dir/rule
 # codegen rule for target.
 CMakeFiles/sumcheck.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sumcheck.dir/build.make CMakeFiles/sumcheck.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=88,89 "Finished codegen for target sumcheck"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=88 "Finished codegen for target sumcheck"
 .PHONY : CMakeFiles/sumcheck.dir/codegen
 
 # clean rule for target.
@@ -341,12 +341,12 @@ CMakeFiles/sumcheck.dir/clean:
 CMakeFiles/prime_field_sumcheck.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/prime_field_sumcheck.dir/build.make CMakeFiles/prime_field_sumcheck.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/prime_field_sumcheck.dir/build.make CMakeFiles/prime_field_sumcheck.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=85,86 "Built target prime_field_sumcheck"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=85 "Built target prime_field_sumcheck"
 .PHONY : CMakeFiles/prime_field_sumcheck.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/prime_field_sumcheck.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 1
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/prime_field_sumcheck.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 0
 .PHONY : CMakeFiles/prime_field_sumcheck.dir/rule
@@ -358,7 +358,7 @@ prime_field_sumcheck: CMakeFiles/prime_field_sumcheck.dir/rule
 # codegen rule for target.
 CMakeFiles/prime_field_sumcheck.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/prime_field_sumcheck.dir/build.make CMakeFiles/prime_field_sumcheck.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=85,86 "Finished codegen for target prime_field_sumcheck"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=85 "Finished codegen for target prime_field_sumcheck"
 .PHONY : CMakeFiles/prime_field_sumcheck.dir/codegen
 
 # clean rule for target.
@@ -373,12 +373,12 @@ CMakeFiles/prime_field_sumcheck.dir/clean:
 CMakeFiles/ulvt_gpu.dir/all: CMakeFiles/unrolled.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ulvt_gpu.dir/build.make CMakeFiles/ulvt_gpu.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ulvt_gpu.dir/build.make CMakeFiles/ulvt_gpu.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=95,96,97 "Built target ulvt_gpu"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=94,95,96 "Built target ulvt_gpu"
 .PHONY : CMakeFiles/ulvt_gpu.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/ulvt_gpu.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/ulvt_gpu.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 0
 .PHONY : CMakeFiles/ulvt_gpu.dir/rule
@@ -390,7 +390,7 @@ ulvt_gpu: CMakeFiles/ulvt_gpu.dir/rule
 # codegen rule for target.
 CMakeFiles/ulvt_gpu.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ulvt_gpu.dir/build.make CMakeFiles/ulvt_gpu.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=95,96,97 "Finished codegen for target ulvt_gpu"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=94,95,96 "Finished codegen for target ulvt_gpu"
 .PHONY : CMakeFiles/ulvt_gpu.dir/codegen
 
 # clean rule for target.
@@ -413,7 +413,7 @@ CMakeFiles/ntt_tests.dir/all: third-party/Catch2/src/CMakeFiles/Catch2WithMain.d
 
 # Build rule for subdir invocation for target.
 CMakeFiles/ntt_tests.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 64
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 65
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/ntt_tests.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 0
 .PHONY : CMakeFiles/ntt_tests.dir/rule
@@ -443,12 +443,12 @@ CMakeFiles/finite_field_tests.dir/all: third-party/Catch2/src/CMakeFiles/Catch2.
 CMakeFiles/finite_field_tests.dir/all: third-party/Catch2/src/CMakeFiles/Catch2WithMain.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/finite_field_tests.dir/build.make CMakeFiles/finite_field_tests.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/finite_field_tests.dir/build.make CMakeFiles/finite_field_tests.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=59,60 "Built target finite_field_tests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=58,59,60 "Built target finite_field_tests"
 .PHONY : CMakeFiles/finite_field_tests.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/finite_field_tests.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 64
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 66
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/finite_field_tests.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 0
 .PHONY : CMakeFiles/finite_field_tests.dir/rule
@@ -460,7 +460,7 @@ finite_field_tests: CMakeFiles/finite_field_tests.dir/rule
 # codegen rule for target.
 CMakeFiles/finite_field_tests.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/finite_field_tests.dir/build.make CMakeFiles/finite_field_tests.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=59,60 "Finished codegen for target finite_field_tests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=58,59,60 "Finished codegen for target finite_field_tests"
 .PHONY : CMakeFiles/finite_field_tests.dir/codegen
 
 # clean rule for target.
@@ -478,12 +478,12 @@ CMakeFiles/sumcheck_test.dir/all: third-party/Catch2/src/CMakeFiles/Catch2.dir/a
 CMakeFiles/sumcheck_test.dir/all: third-party/Catch2/src/CMakeFiles/Catch2WithMain.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sumcheck_test.dir/build.make CMakeFiles/sumcheck_test.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sumcheck_test.dir/build.make CMakeFiles/sumcheck_test.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=91,92,93,94 "Built target sumcheck_test"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=91,92,93 "Built target sumcheck_test"
 .PHONY : CMakeFiles/sumcheck_test.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/sumcheck_test.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 65
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 64
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/sumcheck_test.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 0
 .PHONY : CMakeFiles/sumcheck_test.dir/rule
@@ -495,7 +495,7 @@ sumcheck_test: CMakeFiles/sumcheck_test.dir/rule
 # codegen rule for target.
 CMakeFiles/sumcheck_test.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sumcheck_test.dir/build.make CMakeFiles/sumcheck_test.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=91,92,93,94 "Finished codegen for target sumcheck_test"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=91,92,93 "Finished codegen for target sumcheck_test"
 .PHONY : CMakeFiles/sumcheck_test.dir/codegen
 
 # clean rule for target.
@@ -513,12 +513,12 @@ CMakeFiles/sumcheck_bench.dir/all: third-party/Catch2/src/CMakeFiles/Catch2.dir/
 CMakeFiles/sumcheck_bench.dir/all: third-party/Catch2/src/CMakeFiles/Catch2WithMain.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sumcheck_bench.dir/build.make CMakeFiles/sumcheck_bench.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sumcheck_bench.dir/build.make CMakeFiles/sumcheck_bench.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=90 "Built target sumcheck_bench"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=89,90 "Built target sumcheck_bench"
 .PHONY : CMakeFiles/sumcheck_bench.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/sumcheck_bench.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 62
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 63
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/sumcheck_bench.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 0
 .PHONY : CMakeFiles/sumcheck_bench.dir/rule
@@ -530,7 +530,7 @@ sumcheck_bench: CMakeFiles/sumcheck_bench.dir/rule
 # codegen rule for target.
 CMakeFiles/sumcheck_bench.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sumcheck_bench.dir/build.make CMakeFiles/sumcheck_bench.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=90 "Finished codegen for target sumcheck_bench"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=89,90 "Finished codegen for target sumcheck_bench"
 .PHONY : CMakeFiles/sumcheck_bench.dir/codegen
 
 # clean rule for target.
@@ -547,12 +547,12 @@ CMakeFiles/gpu-benchmarks.dir/all: CMakeFiles/ulvt_gpu.dir/all
 CMakeFiles/gpu-benchmarks.dir/all: third-party/nvbench/nvbench/CMakeFiles/nvbench.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpu-benchmarks.dir/build.make CMakeFiles/gpu-benchmarks.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpu-benchmarks.dir/build.make CMakeFiles/gpu-benchmarks.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=63 "Built target gpu-benchmarks"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=62,63 "Built target gpu-benchmarks"
 .PHONY : CMakeFiles/gpu-benchmarks.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/gpu-benchmarks.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 26
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 27
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/gpu-benchmarks.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 0
 .PHONY : CMakeFiles/gpu-benchmarks.dir/rule
@@ -564,7 +564,7 @@ gpu-benchmarks: CMakeFiles/gpu-benchmarks.dir/rule
 # codegen rule for target.
 CMakeFiles/gpu-benchmarks.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpu-benchmarks.dir/build.make CMakeFiles/gpu-benchmarks.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=63 "Finished codegen for target gpu-benchmarks"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=62,63 "Finished codegen for target gpu-benchmarks"
 .PHONY : CMakeFiles/gpu-benchmarks.dir/codegen
 
 # clean rule for target.
@@ -581,7 +581,7 @@ CMakeFiles/prime_fields_gpu.dir/all: third-party/Catch2/src/CMakeFiles/Catch2.di
 CMakeFiles/prime_fields_gpu.dir/all: third-party/Catch2/src/CMakeFiles/Catch2WithMain.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/prime_fields_gpu.dir/build.make CMakeFiles/prime_fields_gpu.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/prime_fields_gpu.dir/build.make CMakeFiles/prime_fields_gpu.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=87 "Built target prime_fields_gpu"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=86,87 "Built target prime_fields_gpu"
 .PHONY : CMakeFiles/prime_fields_gpu.dir/all
 
 # Build rule for subdir invocation for target.
@@ -598,7 +598,7 @@ prime_fields_gpu: CMakeFiles/prime_fields_gpu.dir/rule
 # codegen rule for target.
 CMakeFiles/prime_fields_gpu.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/prime_fields_gpu.dir/build.make CMakeFiles/prime_fields_gpu.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=87 "Finished codegen for target prime_fields_gpu"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=86,87 "Finished codegen for target prime_fields_gpu"
 .PHONY : CMakeFiles/prime_fields_gpu.dir/codegen
 
 # clean rule for target.
@@ -614,7 +614,7 @@ CMakeFiles/circuit_generator.dir/all: CMakeFiles/unrolled.dir/all
 CMakeFiles/circuit_generator.dir/all: CMakeFiles/ulvt_gpu.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/circuit_generator.dir/build.make CMakeFiles/circuit_generator.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/circuit_generator.dir/build.make CMakeFiles/circuit_generator.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=57,58 "Built target circuit_generator"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=57 "Built target circuit_generator"
 .PHONY : CMakeFiles/circuit_generator.dir/all
 
 # Build rule for subdir invocation for target.
@@ -631,7 +631,7 @@ circuit_generator: CMakeFiles/circuit_generator.dir/rule
 # codegen rule for target.
 CMakeFiles/circuit_generator.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/circuit_generator.dir/build.make CMakeFiles/circuit_generator.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=57,58 "Finished codegen for target circuit_generator"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=57 "Finished codegen for target circuit_generator"
 .PHONY : CMakeFiles/circuit_generator.dir/codegen
 
 # clean rule for target.
@@ -717,7 +717,7 @@ third-party/nvbench/CMakeFiles/nvbench.all.dir/all: third-party/nvbench/exec/CMa
 
 # Build rule for subdir invocation for target.
 third-party/nvbench/CMakeFiles/nvbench.all.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 21
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 20
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 third-party/nvbench/CMakeFiles/nvbench.all.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 0
 .PHONY : third-party/nvbench/CMakeFiles/nvbench.all.dir/rule
@@ -746,12 +746,12 @@ third-party/nvbench/CMakeFiles/nvbench.all.dir/clean:
 _deps/fmt-build/CMakeFiles/fmt.dir/all:
 	$(MAKE) $(MAKESILENT) -f _deps/fmt-build/CMakeFiles/fmt.dir/build.make _deps/fmt-build/CMakeFiles/fmt.dir/depend
 	$(MAKE) $(MAKESILENT) -f _deps/fmt-build/CMakeFiles/fmt.dir/build.make _deps/fmt-build/CMakeFiles/fmt.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=61,62 "Built target fmt"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=61 "Built target fmt"
 .PHONY : _deps/fmt-build/CMakeFiles/fmt.dir/all
 
 # Build rule for subdir invocation for target.
 _deps/fmt-build/CMakeFiles/fmt.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 1
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/fmt-build/CMakeFiles/fmt.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 0
 .PHONY : _deps/fmt-build/CMakeFiles/fmt.dir/rule
@@ -763,7 +763,7 @@ fmt: _deps/fmt-build/CMakeFiles/fmt.dir/rule
 # codegen rule for target.
 _deps/fmt-build/CMakeFiles/fmt.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f _deps/fmt-build/CMakeFiles/fmt.dir/build.make _deps/fmt-build/CMakeFiles/fmt.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=61,62 "Finished codegen for target fmt"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=61 "Finished codegen for target fmt"
 .PHONY : _deps/fmt-build/CMakeFiles/fmt.dir/codegen
 
 # clean rule for target.
@@ -784,7 +784,7 @@ third-party/nvbench/nvbench/CMakeFiles/nvbench.dir/all: third-party/nvbench/nvbe
 
 # Build rule for subdir invocation for target.
 third-party/nvbench/nvbench/CMakeFiles/nvbench.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 19
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 18
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 third-party/nvbench/nvbench/CMakeFiles/nvbench.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 0
 .PHONY : third-party/nvbench/nvbench/CMakeFiles/nvbench.dir/rule
@@ -816,7 +816,7 @@ third-party/nvbench/nvbench/CMakeFiles/nvbench.main.dir/all: third-party/nvbench
 
 # Build rule for subdir invocation for target.
 third-party/nvbench/nvbench/CMakeFiles/nvbench.main.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 19
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 third-party/nvbench/nvbench/CMakeFiles/nvbench.main.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 0
 .PHONY : third-party/nvbench/nvbench/CMakeFiles/nvbench.main.dir/rule
@@ -880,7 +880,7 @@ third-party/nvbench/exec/CMakeFiles/nvbench.ctl.dir/all: third-party/nvbench/nvb
 
 # Build rule for subdir invocation for target.
 third-party/nvbench/exec/CMakeFiles/nvbench.ctl.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 19
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 third-party/nvbench/exec/CMakeFiles/nvbench.ctl.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/intern-04/binius-gpu/build/CMakeFiles 0
 .PHONY : third-party/nvbench/exec/CMakeFiles/nvbench.ctl.dir/rule

@@ -200,6 +200,7 @@ public:
 				);
 			}
 		} else {
+			//printf("here\n");
 			cudaMalloc(&gpu_multilinear_products, BITS_WIDTH * sizeof(uint32_t));
 
 			cudaMemset(gpu_multilinear_products, 0, BITS_WIDTH * sizeof(uint32_t));

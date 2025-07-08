@@ -83,6 +83,9 @@ private:
 		multiply_alpha(field_element + half_width, destination + half_width, half_width, false);
 	}
 
+	// uses the karatsuba algorithm to generate an unrolled multiplication
+	// modifies the original left/right recursion to use 3 multiplications per step
+	// instead of 4 the result is about O(n^1.5) instructions instead of O(n^2)
 	void multiply(
 		uint32_t *field_element_a,
 		uint32_t *field_element_b,

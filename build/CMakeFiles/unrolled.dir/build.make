@@ -72,10 +72,24 @@ include CMakeFiles/unrolled.dir/flags.make
 CMakeFiles/unrolled.dir/codegen:
 .PHONY : CMakeFiles/unrolled.dir/codegen
 
+CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cu.o: CMakeFiles/unrolled.dir/flags.make
+CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cu.o: /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cu
+CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cu.o: CMakeFiles/unrolled.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CUDA object CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cu.o"
+	/usr/local/cuda-12.6/bin/nvcc -forward-unknown-to-host-compiler $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -MD -MT CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cu.o -MF CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cu.o.d -x cu -rdc=true -c /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cu -o CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cu.o
+
+CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cu.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CUDA source to CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cu.i"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_PREPROCESSED_SOURCE
+
+CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cu.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CUDA source to assembly CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cu.s"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_ASSEMBLY_SOURCE
+
 CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled2.cu.o: CMakeFiles/unrolled.dir/flags.make
 CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled2.cu.o: /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled2.cu
 CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled2.cu.o: CMakeFiles/unrolled.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CUDA object CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled2.cu.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CUDA object CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled2.cu.o"
 	/usr/local/cuda-12.6/bin/nvcc -forward-unknown-to-host-compiler $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -MD -MT CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled2.cu.o -MF CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled2.cu.o.d -x cu -rdc=true -c /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled2.cu -o CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled2.cu.o
 
 CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled2.cu.i: cmake_force
@@ -89,7 +103,7 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
 CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled5.cu.o: CMakeFiles/unrolled.dir/flags.make
 CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled5.cu.o: /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled5.cu
 CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled5.cu.o: CMakeFiles/unrolled.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CUDA object CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled5.cu.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CUDA object CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled5.cu.o"
 	/usr/local/cuda-12.6/bin/nvcc -forward-unknown-to-host-compiler $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -MD -MT CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled5.cu.o -MF CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled5.cu.o.d -x cu -rdc=true -c /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled5.cu -o CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled5.cu.o
 
 CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled5.cu.i: cmake_force
@@ -103,7 +117,7 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
 CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled6.cu.o: CMakeFiles/unrolled.dir/flags.make
 CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled6.cu.o: /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled6.cu
 CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled6.cu.o: CMakeFiles/unrolled.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CUDA object CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled6.cu.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CUDA object CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled6.cu.o"
 	/usr/local/cuda-12.6/bin/nvcc -forward-unknown-to-host-compiler $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -MD -MT CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled6.cu.o -MF CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled6.cu.o.d -x cu -rdc=true -c /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled6.cu -o CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled6.cu.o
 
 CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled6.cu.i: cmake_force
@@ -117,7 +131,7 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
 CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled7.cu.o: CMakeFiles/unrolled.dir/flags.make
 CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled7.cu.o: /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled7.cu
 CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled7.cu.o: CMakeFiles/unrolled.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CUDA object CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled7.cu.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CUDA object CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled7.cu.o"
 	/usr/local/cuda-12.6/bin/nvcc -forward-unknown-to-host-compiler $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -MD -MT CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled7.cu.o -MF CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled7.cu.o.d -x cu -rdc=true -c /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled7.cu -o CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled7.cu.o
 
 CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled7.cu.i: cmake_force
@@ -130,6 +144,7 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
 
 # Object files for target unrolled
 unrolled_OBJECTS = \
+"CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cu.o" \
 "CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled2.cu.o" \
 "CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled5.cu.o" \
 "CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled6.cu.o" \
@@ -138,13 +153,14 @@ unrolled_OBJECTS = \
 # External object files for target unrolled
 unrolled_EXTERNAL_OBJECTS =
 
+libunrolled.a: CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cu.o
 libunrolled.a: CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled2.cu.o
 libunrolled.a: CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled5.cu.o
 libunrolled.a: CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled6.cu.o
 libunrolled.a: CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled7.cu.o
 libunrolled.a: CMakeFiles/unrolled.dir/build.make
 libunrolled.a: CMakeFiles/unrolled.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CUDA static library libunrolled.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CUDA static library libunrolled.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/unrolled.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/unrolled.dir/link.txt --verbose=$(VERBOSE)
 

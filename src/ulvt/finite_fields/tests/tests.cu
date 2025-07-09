@@ -263,7 +263,7 @@ TEST_CASE("mul_binary_tower_32b_bitsliced_rolled", "[mul]") {
 
 	BitsliceUtils<(1 << TEST_TOWER_HEIGHT)>::bitslice_transpose(b);
 
-	multiply_rolled(a, b, result, 1 << TEST_TOWER_HEIGHT);
+	multiply_rolled_karatsuba(a, b, result, 1 << TEST_TOWER_HEIGHT);
 
 	BitsliceUtils<(1 << TEST_TOWER_HEIGHT)>::bitslice_untranspose(result);
 
@@ -282,9 +282,9 @@ TEST_CASE("mul_binary_tower_32b_bitsliced_rolled", "[mul]") {
 
 	BENCHMARK("mul_binary_tower_32b_bitsliced_unrolled cpu") {
 		for (size_t i = 0; i < (1 + NUM_OPS / (32 * 3)); i++) {
-			multiply_rolled(a, b, result, 1 << TEST_TOWER_HEIGHT);
-			multiply_rolled(b, result, a, 1 << TEST_TOWER_HEIGHT);
-			multiply_rolled(result, a, b, 1 << TEST_TOWER_HEIGHT);
+			multiply_rolled_karatsuba(a, b, result, 1 << TEST_TOWER_HEIGHT);
+			multiply_rolled_karatsuba(b, result, a, 1 << TEST_TOWER_HEIGHT);
+			multiply_rolled_karatsuba(result, a, b, 1 << TEST_TOWER_HEIGHT);
 		}
 
 		return a;
@@ -297,7 +297,7 @@ TEST_CASE("mul_binary_tower_128b_bitsliced_rolled", "[mul]") {
 	uint32_t b[1 << TEST_TOWER_HEIGHT];
 	uint32_t result[1 << TEST_TOWER_HEIGHT];
 
-	for (uint32_t i = 0; i < 4; ++i) {
+	for (uint32_t i = 0; i < (1 << TEST_TOWER_HEIGHT); ++i) {
 		result[i] = 0;
 	}
 

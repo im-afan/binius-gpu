@@ -69,17 +69,17 @@ void benchmark(int num_runs) {
 }
 
 int main() {
-	benchmark<20, 2>(10);
-	benchmark<20, 3>(10);
+	//benchmark<20, 2>(10);
+	//benchmark<20, 3>(10);
 	benchmark<20, 4>(10);
 
-	benchmark<24, 2>(5);
+	/*benchmark<24, 2>(5);
 	benchmark<24, 3>(5);
 	benchmark<24, 4>(5);
 
 	benchmark<28, 2>(2);
 	benchmark<28, 3>(2);
-	benchmark<28, 4>(2);
+	benchmark<28, 4>(2);*/
 
 	return 0;
 }

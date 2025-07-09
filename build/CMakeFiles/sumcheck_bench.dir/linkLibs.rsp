@@ -1,0 +1,1 @@
+ -Wl,-rpath,/home/intern-04/binius-gpu/build/third-party/Catch2/src libsumcheck.a "third-party/Catch2/src/libCatch2Main.so.3.5.0" libunrolled.a "third-party/Catch2/src/libCatch2.so.3.5.0" -lcudadevrt -lcudart_static -lrt -lpthread -ldl 

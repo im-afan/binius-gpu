@@ -280,7 +280,7 @@ TEST_CASE("mul_binary_tower_32b_bitsliced_rolled", "[mul]") {
 		a[i] = generator();
 	}
 
-	BENCHMARK("mul_binary_tower_32b_bitsliced_unrolled cpu") {
+	BENCHMARK("mul_binary_tower_32b_bitsliced_rolled cpu") {
 		for (size_t i = 0; i < (1 + NUM_OPS / (32 * 3)); i++) {
 			multiply_rolled_karatsuba(a, b, result, 1 << TEST_TOWER_HEIGHT);
 			multiply_rolled_karatsuba(b, result, a, 1 << TEST_TOWER_HEIGHT);
@@ -313,7 +313,7 @@ TEST_CASE("mul_binary_tower_128b_bitsliced_rolled", "[mul]") {
 
 	BitsliceUtils<(1 << TEST_TOWER_HEIGHT)>::bitslice_transpose(b);
 
-	multiply_rolled(a, b, result, 1 << TEST_TOWER_HEIGHT);
+	multiply_rolled_karatsuba(a, b, result, 1 << TEST_TOWER_HEIGHT);
 
 	BitsliceUtils<(1 << TEST_TOWER_HEIGHT)>::bitslice_untranspose(result);
 
@@ -329,11 +329,68 @@ TEST_CASE("mul_binary_tower_128b_bitsliced_rolled", "[mul]") {
 		a[i] = generator();
 	}
 
-	BENCHMARK("mul_binary_tower_128b_bitsliced_unrolled cpu") {
+	BENCHMARK("mul_binary_tower_128b_bitsliced_rolled cpu") {
 		for (size_t i = 0; i < (1 + NUM_OPS / (32 * 3)); i++) {
-			multiply_rolled(a, b, result, 1 << TEST_TOWER_HEIGHT);
-			multiply_rolled(b, result, a, 1 << TEST_TOWER_HEIGHT);
-			multiply_rolled(result, a, b, 1 << TEST_TOWER_HEIGHT);
+			multiply_rolled_karatsuba(a, b, result, 1 << TEST_TOWER_HEIGHT);
+			multiply_rolled_karatsuba(b, result, a, 1 << TEST_TOWER_HEIGHT);
+			multiply_rolled_karatsuba(result, a, b, 1 << TEST_TOWER_HEIGHT);
+		}
+
+		return a;
+	};
+}
+
+TEST_CASE("mul_binary_tower_32b_bitsliced_parallel", "[mul]") {
+	const int TEST_TOWER_HEIGHT = 5;
+	uint32_t a[32];
+	uint32_t b[32];
+	uint32_t result[32];
+
+	for (uint32_t i = 0; i < 32; ++i) {
+		result[i] = 0;
+	}
+
+	a[0] = 0xd82c07cd;
+	b[0] = 0xd82c07cd;
+
+	a[1] = 0x6b4c9946;
+	b[1] = 0xd82c07cd;
+
+	a[2] = 0x6b4c9946;
+	b[2] = 0x3d47e731;
+
+	a[3] = 0xbe127079;
+	b[3] = 0xd82c07cd;
+
+	a[4] = 0xbe127079;
+	b[4] = 0x2cd911fc;
+
+	BitsliceUtils<(1 << TEST_TOWER_HEIGHT)>::bitslice_transpose(a);
+
+	BitsliceUtils<(1 << TEST_TOWER_HEIGHT)>::bitslice_transpose(b);
+
+	multiply_rolled_karatsuba(a, b, result, 1 << TEST_TOWER_HEIGHT);
+
+	BitsliceUtils<(1 << TEST_TOWER_HEIGHT)>::bitslice_untranspose(result);
+
+	REQUIRE(result[0] == 0xafab1b8f);
+	REQUIRE(result[1] == 0xf35c8d0f);
+	REQUIRE(result[2] == 0xf849322d);
+	REQUIRE(result[3] == 0xd86f9eba);
+	REQUIRE(result[4] == 0x2b8b8f27);
+
+	uint32_t seed = std::chrono::system_clock::now().time_since_epoch().count();
+	std::mt19937 generator(seed);
+
+	for (int i = 0; i < 32; ++i) {
+		a[i] = generator();
+	}
+
+	BENCHMARK("mul_binary_tower_32b_bitsliced_unrolled cpu") {
+		for (size_t i = 0; i < (1 + NUM_OPS / (32 * 3)); i++) {
+			multiply_rolled_karatsuba(a, b, result, 1 << TEST_TOWER_HEIGHT);
+			multiply_rolled_karatsuba(b, result, a, 1 << TEST_TOWER_HEIGHT);
+			multiply_rolled_karatsuba(result, a, b, 1 << TEST_TOWER_HEIGHT);
 		}
 
 		return a;

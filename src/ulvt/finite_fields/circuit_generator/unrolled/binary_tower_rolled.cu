@@ -3,6 +3,17 @@
 #include "binary_tower_rolled.cuh"
 #include "../constants.hpp"
 
+#define check(ans) { gpuAssert((ans), __FILE__, __LINE__); }
+inline void gpuAssert(cudaError_t code, const char *file, int line, bool abort=true)
+{
+   if (code != cudaSuccess) 
+   {
+      fprintf(stderr,"GPUassert: %s %s %d\n", cudaGetErrorString(code), file, line);
+      if (abort) exit(code);
+   }
+}
+
+
 __host__ __device__ void add(const uint32_t* a, const uint32_t* b, uint32_t* destination, uint32_t num_bits) {
     for(int i = 0; i < num_bits; i++) 
         destination[i] = a[i] ^ b[i];
@@ -19,7 +30,6 @@ __host__ __device__ void multiply_alpha(const uint32_t* field_element, uint32_t*
     // (L + R*x_{k-1}) * x_{k-1} = L*x_{k-1} + R*(x_{k-1}*x_{k-2}+1)
     // =  R + x_{k-1}*(L+R*x_{k-2})
     // = R + x_{k-1}*(L+multiply_alpha(r, bits/2))
-    //printf("multiply_alpha\n");
     if(num_bits == 1) {
         destination[0] = field_element[0];
     } else{
@@ -115,26 +125,30 @@ __global__ void multiply_kernel_decompose(const uint32_t* field_element_a, const
     for(int i = idx; i < num_bits * num_bits; i += stride) {
         uint32_t a_idx = 0, b_idx = 0;
 
-        int tmp_i = 1;
+        int tmp_i = i;
         int odd = 0;
         int cnt = 0;
         while(tmp_i > 0) {
-            if(!odd) {
-                a_idx |= (i & 1) << cnt;
+            if(odd == 0) {
+                a_idx |= (tmp_i & 1) << cnt;
             } else {
-                b_idx |= (i & 1) << cnt;
+                b_idx |= (tmp_i & 1) << cnt;
                 cnt++;
             }
             tmp_i >>= 1;
             odd = 1 - odd;
         }
-
-        if(a_idx % 16 == 0) b_s[b_idx % 16] = field_element_b[b_idx];
-        if(b_idx % 16 == 0) a_s[a_idx % 16] = field_element_a[a_idx];
+        
+        if(a_idx % 16 == 0) {
+            b_s[b_idx % 16] = field_element_b[b_idx];
+        }
+        if(b_idx % 16 == 0) {
+            a_s[a_idx % 16] = field_element_a[a_idx];
+        }
 
         __syncthreads();
         
-        ab_s[tid] = a_s[a_idx % 16] * b_s[b_idx % 16];
+        ab_s[tid] = a_s[a_idx % 16] & b_s[b_idx % 16];
 
         __syncthreads();
         
@@ -148,6 +162,7 @@ __global__ void multiply_kernel_decompose(const uint32_t* field_element_a, const
 
         __syncthreads();
     }
+    //}
 }
 
 __global__ void multiply_kernel_compose(const uint32_t* decomposed, uint32_t* destination, uint32_t height, uint32_t num_elements) {
@@ -157,44 +172,46 @@ __global__ void multiply_kernel_compose(const uint32_t* decomposed, uint32_t* de
     uint32_t tid = threadIdx.x;
     uint32_t idx = threadIdx.x + blockIdx.x * blockDim.x;
     uint32_t stride = blockDim.x * gridDim.x;
+    uint32_t z2_alpha[128];
 
     for(int i = idx; i < num_elements / 4; i += stride) {
         const uint32_t* start = decomposed + i*4*num_bits;
         uint32_t* destination_start = destination + i*2*num_bits;
-        uint32_t z2_alpha[num_bits];
 
-        multiply_alpha(start + 3*num_bits, z2_alpha, num_elements);
+        multiply_alpha(start + 3*num_bits, z2_alpha, num_bits);
 
         add(start, start + 3*num_bits, destination_start, num_bits);
-        add(start + 1*num_bits, start + 2*num_bits, z2_alpha, destination_start + 1*height, num_bits);
+        add(start + 1*num_bits, start + 2*num_bits, z2_alpha, destination_start + num_bits, num_bits);
     }
 }
 
-__device__ __host__ void multiply_parallel(const uint32_t* field_element_a, const uint32_t* field_element_b, uint32_t* destination, uint32_t num_bits) { // TODO streaming
+__host__ __device__ void multiply_parallel(const uint32_t* field_element_a, const uint32_t* field_element_b, uint32_t* destination, uint32_t num_bits) { // TODO streaming
     uint32_t* a_d;
     uint32_t* b_d;
-    uint32_t* decomposition;//[num_bits * num_bits / 2][TOWER_HEIGHT];
-    cudaMalloc(&decomposition, num_bits * num_bits);
-    cudaMalloc(&a_d, num_bits * sizeof(uint32_t));
-    cudaMalloc(&b_d, num_bits * sizeof(uint32_t));
-    cudaMemcpy(a_d, field_element_a, num_bits * sizeof(uint32_t), cudaMemcpyHostToDevice);
-    cudaMemcpy(b_d, field_element_b, num_bits * sizeof(uint32_t), cudaMemcpyHostToDevice);
+    uint32_t* decomposition;
+    check(cudaMalloc((void**) &decomposition, num_bits * num_bits * sizeof(uint32_t)));
+    check(cudaMalloc((void**) &a_d, num_bits * sizeof(uint32_t)));
+    check(cudaMalloc((void**) &b_d, num_bits * sizeof(uint32_t)));
+    check(cudaMemcpy(a_d, field_element_a, num_bits * sizeof(uint32_t), cudaMemcpyHostToDevice));
+    check(cudaMemcpy(b_d, field_element_b, num_bits * sizeof(uint32_t), cudaMemcpyHostToDevice));
 
-    multiply_kernel_decompose<<<256, 1024>>>(a_d, b_d, decomposition, num_bits); 
-    cudaDeviceSynchronize();
+    multiply_kernel_decompose<<<1024, 256>>>(a_d, b_d, decomposition, num_bits); 
+    check(cudaDeviceSynchronize());
 
     int idx = 0;
     int increment = num_bits * num_bits / 2;
-    int num_elements = num_bits * num_bits;
+    int num_elements = num_bits * num_bits / 4;
     int height = 1;
-    while(num_elements > 0) {
-        multiply_kernel_compose<<<256, 1024>>>(decomposition + idx, decomposition + idx + increment, height, increment);  
-        cudaDeviceSynchronize();
+    while(num_elements > 1) {
+        //printf("idx = %d, idx+increment=%d, numel=%d, num_bits=%d\n", idx, idx+increment, num_elements, 1<<height);
+        multiply_kernel_compose<<<1024, 128>>>(decomposition + idx, decomposition + idx + increment, height, num_elements);  
+        check(cudaDeviceSynchronize());
         idx += increment;
         increment = increment / 2;
         num_elements = num_elements / 4;
         height++;
     }
+    //printf("final idx %d out of %d, there are %d bits.\n", idx, num_bits*num_bits, num_bits);
+    check(cudaMemcpy(destination, decomposition + idx, num_bits * sizeof(uint32_t), cudaMemcpyDeviceToHost));
 
-    cudaMemcpy(decomposition + idx, destination, num_bits * sizeof(uint32_t), cudaMemcpyDeviceToHost);
 }

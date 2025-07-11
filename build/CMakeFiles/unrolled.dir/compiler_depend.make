@@ -4,6 +4,7 @@
 CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cu.o: /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cu \
   /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/constants.hpp \
   /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cuh \
+  /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled.cuh \
   /usr/include/alloca.h \
   /usr/include/assert.h \
   /usr/include/c++/12/bits/concept_check.h \
@@ -455,8 +456,6 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
 CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled5.cu.o: /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled5.cu \
   /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled.cuh \
   /usr/include/alloca.h \
-  /usr/include/asm-generic/errno-base.h \
-  /usr/include/asm-generic/errno.h \
   /usr/include/assert.h \
   /usr/include/c++/12/bits/concept_check.h \
   /usr/include/c++/12/bits/cpp_type_traits.h \
@@ -508,20 +507,12 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
   /usr/include/c++/12/type_traits \
   /usr/include/c++/12/utility \
   /usr/include/ctype.h \
-  /usr/include/dlfcn.h \
   /usr/include/endian.h \
-  /usr/include/errno.h \
-  /usr/include/fcntl.h \
   /usr/include/features-time64.h \
   /usr/include/features.h \
   /usr/include/limits.h \
-  /usr/include/linux/close_range.h \
-  /usr/include/linux/errno.h \
-  /usr/include/linux/falloc.h \
   /usr/include/linux/limits.h \
   /usr/include/math.h \
-  /usr/include/pthread.h \
-  /usr/include/sched.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
   /usr/include/stdio.h \
@@ -529,29 +520,15 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
   /usr/include/string.h \
   /usr/include/strings.h \
   /usr/include/time.h \
-  /usr/include/unistd.h \
-  /usr/include/wchar.h \
-  /usr/include/x86_64-linux-gnu/asm/errno.h \
   /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
   /usr/include/x86_64-linux-gnu/bits/byteswap.h \
-  /usr/include/x86_64-linux-gnu/bits/confname.h \
-  /usr/include/x86_64-linux-gnu/bits/cpu-set.h \
-  /usr/include/x86_64-linux-gnu/bits/dl_find_object.h \
-  /usr/include/x86_64-linux-gnu/bits/dlfcn.h \
   /usr/include/x86_64-linux-gnu/bits/endian.h \
   /usr/include/x86_64-linux-gnu/bits/endianness.h \
-  /usr/include/x86_64-linux-gnu/bits/environments.h \
-  /usr/include/x86_64-linux-gnu/bits/errno.h \
-  /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
-  /usr/include/x86_64-linux-gnu/bits/fcntl.h \
-  /usr/include/x86_64-linux-gnu/bits/fcntl2.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
   /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
   /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
   /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
-  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
-  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
   /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
@@ -563,15 +540,11 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
   /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
   /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
   /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
-  /usr/include/x86_64-linux-gnu/bits/sched.h \
   /usr/include/x86_64-linux-gnu/bits/select.h \
   /usr/include/x86_64-linux-gnu/bits/select2.h \
-  /usr/include/x86_64-linux-gnu/bits/setjmp.h \
-  /usr/include/x86_64-linux-gnu/bits/stat.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
   /usr/include/x86_64-linux-gnu/bits/stdio.h \
@@ -584,7 +557,6 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
   /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
   /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
   /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
-  /usr/include/x86_64-linux-gnu/bits/struct_stat.h \
   /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
   /usr/include/x86_64-linux-gnu/bits/time.h \
   /usr/include/x86_64-linux-gnu/bits/time64.h \
@@ -601,30 +573,21 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
   /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
-  /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
-  /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
-  /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
   /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/timer_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
   /usr/include/x86_64-linux-gnu/bits/typesizes.h \
   /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
   /usr/include/x86_64-linux-gnu/bits/uio_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/unistd.h \
-  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
   /usr/include/x86_64-linux-gnu/bits/waitflags.h \
   /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
-  /usr/include/x86_64-linux-gnu/bits/wchar2.h \
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \
   /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
   /usr/include/x86_64-linux-gnu/c++/12/bits/c++config.h \
@@ -668,14 +631,6 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
   /usr/local/cuda-12.6/targets/x86_64-linux/include/driver_functions.h \
   /usr/local/cuda-12.6/targets/x86_64-linux/include/driver_types.h \
   /usr/local/cuda-12.6/targets/x86_64-linux/include/library_types.h \
-  /usr/local/cuda-12.6/targets/x86_64-linux/include/nvtx3/nvToolsExt.h \
-  /usr/local/cuda-12.6/targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxImpl.h \
-  /usr/local/cuda-12.6/targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxImplCore.h \
-  /usr/local/cuda-12.6/targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxInit.h \
-  /usr/local/cuda-12.6/targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxInitDecls.h \
-  /usr/local/cuda-12.6/targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxInitDefs.h \
-  /usr/local/cuda-12.6/targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxLinkOnce.h \
-  /usr/local/cuda-12.6/targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxTypes.h \
   /usr/local/cuda-12.6/targets/x86_64-linux/include/sm_20_atomic_functions.h \
   /usr/local/cuda-12.6/targets/x86_64-linux/include/sm_20_atomic_functions.hpp \
   /usr/local/cuda-12.6/targets/x86_64-linux/include/sm_20_intrinsics.h \
@@ -703,8 +658,6 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
 CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled6.cu.o: /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled6.cu \
   /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled.cuh \
   /usr/include/alloca.h \
-  /usr/include/asm-generic/errno-base.h \
-  /usr/include/asm-generic/errno.h \
   /usr/include/assert.h \
   /usr/include/c++/12/bits/concept_check.h \
   /usr/include/c++/12/bits/cpp_type_traits.h \
@@ -756,20 +709,12 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
   /usr/include/c++/12/type_traits \
   /usr/include/c++/12/utility \
   /usr/include/ctype.h \
-  /usr/include/dlfcn.h \
   /usr/include/endian.h \
-  /usr/include/errno.h \
-  /usr/include/fcntl.h \
   /usr/include/features-time64.h \
   /usr/include/features.h \
   /usr/include/limits.h \
-  /usr/include/linux/close_range.h \
-  /usr/include/linux/errno.h \
-  /usr/include/linux/falloc.h \
   /usr/include/linux/limits.h \
   /usr/include/math.h \
-  /usr/include/pthread.h \
-  /usr/include/sched.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
   /usr/include/stdio.h \
@@ -777,29 +722,15 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
   /usr/include/string.h \
   /usr/include/strings.h \
   /usr/include/time.h \
-  /usr/include/unistd.h \
-  /usr/include/wchar.h \
-  /usr/include/x86_64-linux-gnu/asm/errno.h \
   /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
   /usr/include/x86_64-linux-gnu/bits/byteswap.h \
-  /usr/include/x86_64-linux-gnu/bits/confname.h \
-  /usr/include/x86_64-linux-gnu/bits/cpu-set.h \
-  /usr/include/x86_64-linux-gnu/bits/dl_find_object.h \
-  /usr/include/x86_64-linux-gnu/bits/dlfcn.h \
   /usr/include/x86_64-linux-gnu/bits/endian.h \
   /usr/include/x86_64-linux-gnu/bits/endianness.h \
-  /usr/include/x86_64-linux-gnu/bits/environments.h \
-  /usr/include/x86_64-linux-gnu/bits/errno.h \
-  /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
-  /usr/include/x86_64-linux-gnu/bits/fcntl.h \
-  /usr/include/x86_64-linux-gnu/bits/fcntl2.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
   /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
   /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
   /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
-  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
-  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
   /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
@@ -811,15 +742,11 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
   /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
   /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
   /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
-  /usr/include/x86_64-linux-gnu/bits/sched.h \
   /usr/include/x86_64-linux-gnu/bits/select.h \
   /usr/include/x86_64-linux-gnu/bits/select2.h \
-  /usr/include/x86_64-linux-gnu/bits/setjmp.h \
-  /usr/include/x86_64-linux-gnu/bits/stat.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
   /usr/include/x86_64-linux-gnu/bits/stdio.h \
@@ -832,7 +759,6 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
   /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
   /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
   /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
-  /usr/include/x86_64-linux-gnu/bits/struct_stat.h \
   /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
   /usr/include/x86_64-linux-gnu/bits/time.h \
   /usr/include/x86_64-linux-gnu/bits/time64.h \
@@ -849,30 +775,21 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
   /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
-  /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
-  /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
-  /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
   /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/timer_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
   /usr/include/x86_64-linux-gnu/bits/typesizes.h \
   /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
   /usr/include/x86_64-linux-gnu/bits/uio_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/unistd.h \
-  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
   /usr/include/x86_64-linux-gnu/bits/waitflags.h \
   /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
-  /usr/include/x86_64-linux-gnu/bits/wchar2.h \
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \
   /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
   /usr/include/x86_64-linux-gnu/c++/12/bits/c++config.h \
@@ -916,14 +833,6 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
   /usr/local/cuda-12.6/targets/x86_64-linux/include/driver_functions.h \
   /usr/local/cuda-12.6/targets/x86_64-linux/include/driver_types.h \
   /usr/local/cuda-12.6/targets/x86_64-linux/include/library_types.h \
-  /usr/local/cuda-12.6/targets/x86_64-linux/include/nvtx3/nvToolsExt.h \
-  /usr/local/cuda-12.6/targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxImpl.h \
-  /usr/local/cuda-12.6/targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxImplCore.h \
-  /usr/local/cuda-12.6/targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxInit.h \
-  /usr/local/cuda-12.6/targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxInitDecls.h \
-  /usr/local/cuda-12.6/targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxInitDefs.h \
-  /usr/local/cuda-12.6/targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxLinkOnce.h \
-  /usr/local/cuda-12.6/targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxTypes.h \
   /usr/local/cuda-12.6/targets/x86_64-linux/include/sm_20_atomic_functions.h \
   /usr/local/cuda-12.6/targets/x86_64-linux/include/sm_20_atomic_functions.hpp \
   /usr/local/cuda-12.6/targets/x86_64-linux/include/sm_20_intrinsics.h \
@@ -951,8 +860,6 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
 CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled7.cu.o: /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled7.cu \
   /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled.cuh \
   /usr/include/alloca.h \
-  /usr/include/asm-generic/errno-base.h \
-  /usr/include/asm-generic/errno.h \
   /usr/include/assert.h \
   /usr/include/c++/12/bits/concept_check.h \
   /usr/include/c++/12/bits/cpp_type_traits.h \
@@ -1004,20 +911,12 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
   /usr/include/c++/12/type_traits \
   /usr/include/c++/12/utility \
   /usr/include/ctype.h \
-  /usr/include/dlfcn.h \
   /usr/include/endian.h \
-  /usr/include/errno.h \
-  /usr/include/fcntl.h \
   /usr/include/features-time64.h \
   /usr/include/features.h \
   /usr/include/limits.h \
-  /usr/include/linux/close_range.h \
-  /usr/include/linux/errno.h \
-  /usr/include/linux/falloc.h \
   /usr/include/linux/limits.h \
   /usr/include/math.h \
-  /usr/include/pthread.h \
-  /usr/include/sched.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
   /usr/include/stdio.h \
@@ -1025,29 +924,15 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
   /usr/include/string.h \
   /usr/include/strings.h \
   /usr/include/time.h \
-  /usr/include/unistd.h \
-  /usr/include/wchar.h \
-  /usr/include/x86_64-linux-gnu/asm/errno.h \
   /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
   /usr/include/x86_64-linux-gnu/bits/byteswap.h \
-  /usr/include/x86_64-linux-gnu/bits/confname.h \
-  /usr/include/x86_64-linux-gnu/bits/cpu-set.h \
-  /usr/include/x86_64-linux-gnu/bits/dl_find_object.h \
-  /usr/include/x86_64-linux-gnu/bits/dlfcn.h \
   /usr/include/x86_64-linux-gnu/bits/endian.h \
   /usr/include/x86_64-linux-gnu/bits/endianness.h \
-  /usr/include/x86_64-linux-gnu/bits/environments.h \
-  /usr/include/x86_64-linux-gnu/bits/errno.h \
-  /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
-  /usr/include/x86_64-linux-gnu/bits/fcntl.h \
-  /usr/include/x86_64-linux-gnu/bits/fcntl2.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
   /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
   /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
   /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
-  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
-  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
   /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
@@ -1059,15 +944,11 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
   /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
   /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
   /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
-  /usr/include/x86_64-linux-gnu/bits/sched.h \
   /usr/include/x86_64-linux-gnu/bits/select.h \
   /usr/include/x86_64-linux-gnu/bits/select2.h \
-  /usr/include/x86_64-linux-gnu/bits/setjmp.h \
-  /usr/include/x86_64-linux-gnu/bits/stat.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
   /usr/include/x86_64-linux-gnu/bits/stdio.h \
@@ -1080,7 +961,6 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
   /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
   /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
   /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
-  /usr/include/x86_64-linux-gnu/bits/struct_stat.h \
   /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
   /usr/include/x86_64-linux-gnu/bits/time.h \
   /usr/include/x86_64-linux-gnu/bits/time64.h \
@@ -1097,30 +977,21 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
   /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
-  /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
-  /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
-  /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
   /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/timer_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
   /usr/include/x86_64-linux-gnu/bits/typesizes.h \
   /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
   /usr/include/x86_64-linux-gnu/bits/uio_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/unistd.h \
-  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
   /usr/include/x86_64-linux-gnu/bits/waitflags.h \
   /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
-  /usr/include/x86_64-linux-gnu/bits/wchar2.h \
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \
   /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
   /usr/include/x86_64-linux-gnu/c++/12/bits/c++config.h \
@@ -1164,14 +1035,6 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
   /usr/local/cuda-12.6/targets/x86_64-linux/include/driver_functions.h \
   /usr/local/cuda-12.6/targets/x86_64-linux/include/driver_types.h \
   /usr/local/cuda-12.6/targets/x86_64-linux/include/library_types.h \
-  /usr/local/cuda-12.6/targets/x86_64-linux/include/nvtx3/nvToolsExt.h \
-  /usr/local/cuda-12.6/targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxImpl.h \
-  /usr/local/cuda-12.6/targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxImplCore.h \
-  /usr/local/cuda-12.6/targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxInit.h \
-  /usr/local/cuda-12.6/targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxInitDecls.h \
-  /usr/local/cuda-12.6/targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxInitDefs.h \
-  /usr/local/cuda-12.6/targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxLinkOnce.h \
-  /usr/local/cuda-12.6/targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxTypes.h \
   /usr/local/cuda-12.6/targets/x86_64-linux/include/sm_20_atomic_functions.h \
   /usr/local/cuda-12.6/targets/x86_64-linux/include/sm_20_atomic_functions.hpp \
   /usr/local/cuda-12.6/targets/x86_64-linux/include/sm_20_intrinsics.h \
@@ -1263,10 +1126,6 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
 
 /usr/include/asm-generic/errno-base.h:
 
-/usr/include/x86_64-linux-gnu/bits/confname.h:
-
-/home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled.cuh:
-
 /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled2.cu:
 
 /usr/local/cuda-12.6/targets/x86_64-linux/include/vector_types.h:
@@ -1321,7 +1180,7 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
 
 /usr/local/cuda-12.6/targets/x86_64-linux/include/crt/sm_80_rt.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/fp-logb.h:
+/usr/local/cuda-12.6/targets/x86_64-linux/include/crt/sm_80_rt.h:
 
 /usr/local/cuda-12.6/targets/x86_64-linux/include/sm_35_intrinsics.h:
 
@@ -1340,8 +1199,6 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
 /usr/include/strings.h:
 
 /usr/include/c++/12/tr1/gamma.tcc:
-
-/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
 
@@ -1373,10 +1230,6 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
 
 /usr/include/c++/12/bits/concept_check.h:
 
-/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
-
-/usr/include/c++/12/tr1/poly_hermite.tcc:
-
 /usr/local/cuda-12.6/targets/x86_64-linux/include/vector_functions.hpp:
 
 /usr/include/c++/12/tr1/exp_integral.tcc:
@@ -1399,9 +1252,59 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
 
 /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/constants.hpp:
 
-/usr/local/cuda-12.6/targets/x86_64-linux/include/crt/sm_80_rt.h:
+/usr/include/c++/12/bits/predefined_ops.h:
+
+/usr/include/c++/12/cstdint:
+
+/usr/local/cuda-12.6/targets/x86_64-linux/include/driver_types.h:
+
+/usr/include/x86_64-linux-gnu/bits/floatn.h:
+
+/usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h:
+
+/usr/include/c++/12/bits/exception.h:
+
+/usr/include/x86_64-linux-gnu/bits/confname.h:
+
+/home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled.cuh:
+
+/usr/include/c++/12/bits/cpp_type_traits.h:
+
+/usr/include/c++/12/bits/functexcept.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
+
+/usr/include/c++/12/ext/type_traits.h:
+
+/usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
+
+/usr/include/stdc-predef.h:
+
+/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
+
+/usr/include/c++/12/debug/assertions.h:
+
+/usr/include/x86_64-linux-gnu/bits/stat.h:
+
+/usr/include/c++/12/bits/utility.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/FILE.h:
+
+/home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cuh:
+
+/usr/include/x86_64-linux-gnu/bits/wchar2.h:
+
+/usr/include/features-time64.h:
+
+/usr/include/c++/12/bits/ranges_cmp.h:
+
+/usr/include/alloca.h:
+
+/usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
 
 /usr/include/c++/12/bits/move.h:
+
+/usr/include/x86_64-linux-gnu/bits/fp-logb.h:
 
 /usr/include/c++/12/debug/debug.h:
 
@@ -1414,52 +1317,6 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
 /usr/include/x86_64-linux-gnu/bits/select.h:
 
 /usr/local/cuda-12.6/targets/x86_64-linux/include/crt/host_defines.h:
-
-/usr/include/c++/12/bits/predefined_ops.h:
-
-/usr/include/c++/12/cstdint:
-
-/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
-
-/usr/include/c++/12/ext/type_traits.h:
-
-/usr/local/cuda-12.6/targets/x86_64-linux/include/driver_types.h:
-
-/usr/include/x86_64-linux-gnu/bits/floatn.h:
-
-/usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h:
-
-/usr/include/c++/12/bits/exception.h:
-
-/usr/include/c++/12/bits/cpp_type_traits.h:
-
-/usr/include/c++/12/bits/functexcept.h:
-
-/usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
-
-/usr/include/stdc-predef.h:
-
-/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
-
-/home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cuh:
-
-/usr/include/c++/12/debug/assertions.h:
-
-/usr/include/x86_64-linux-gnu/bits/stat.h:
-
-/usr/include/c++/12/bits/utility.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/FILE.h:
-
-/usr/include/x86_64-linux-gnu/bits/wchar2.h:
-
-/usr/include/features-time64.h:
-
-/usr/include/c++/12/bits/ranges_cmp.h:
-
-/usr/include/alloca.h:
-
-/usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
 
 /usr/local/cuda-12.6/targets/x86_64-linux/include/device_atomic_functions.h:
 
@@ -1493,13 +1350,19 @@ CMakeFiles/unrolled.dir/src/ulvt/finite_fields/circuit_generator/unrolled/binary
 
 /usr/include/c++/12/initializer_list:
 
+/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
+
+/usr/include/c++/12/tr1/poly_hermite.tcc:
+
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
+
 /usr/include/c++/12/tr1/modified_bessel_func.tcc:
 
 /usr/include/c++/12/bits/stl_construct.h:
 
-/usr/include/x86_64-linux-gnu/sys/cdefs.h:
-
 /usr/include/c++/12/limits:
+
+/usr/include/x86_64-linux-gnu/sys/cdefs.h:
 
 /usr/include/stdlib.h:
 

@@ -1,7 +1,6 @@
 #include <cstdint>
 
 #include "../utils/constants.hpp"
-#include <nvtx3/nvToolsExt.h>
 
 template <uint32_t INTERPOLATION_POINTS, uint32_t COMPOSITION_SIZE, uint32_t EVALS_PER_MULTILINEAR>
 __global__ void compute_compositions( // evaluates Si(Xi) at multiple points and gets the claimed sum

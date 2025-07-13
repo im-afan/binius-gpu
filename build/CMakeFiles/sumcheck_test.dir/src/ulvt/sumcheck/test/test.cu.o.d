@@ -350,33 +350,5 @@ CMakeFiles/sumcheck_test.dir/src/ulvt/sumcheck/test/test.cu.o : /home/intern-04/
     /home/intern-04/binius-gpu/src/ulvt/sumcheck/test/../core/core.cuh \
     /home/intern-04/binius-gpu/src/ulvt/sumcheck/test/../core/../utils/constants.hpp \
     /home/intern-04/binius-gpu/src/ulvt/sumcheck/test/../core/kernels.cuh \
-    /usr/local/cuda-12.6/bin/../targets/x86_64-linux/include/nvtx3/nvToolsExt.h \
-    /usr/local/cuda-12.6/bin/../targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxLinkOnce.h \
-    /usr/local/cuda-12.6/bin/../targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxTypes.h \
-    /usr/local/cuda-12.6/bin/../targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxImpl.h \
-    /usr/include/unistd.h \
-    /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
-    /usr/include/x86_64-linux-gnu/bits/environments.h \
-    /usr/include/x86_64-linux-gnu/bits/confname.h \
-    /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
-    /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
-    /usr/include/x86_64-linux-gnu/bits/unistd.h \
-    /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
-    /usr/include/linux/close_range.h \
-    /usr/include/dlfcn.h \
-    /usr/include/x86_64-linux-gnu/bits/dlfcn.h \
-    /usr/include/x86_64-linux-gnu/bits/dl_find_object.h \
-    /usr/include/fcntl.h \
-    /usr/include/x86_64-linux-gnu/bits/fcntl.h \
-    /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
-    /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
-    /usr/include/linux/falloc.h \
-    /usr/include/x86_64-linux-gnu/bits/stat.h \
-    /usr/include/x86_64-linux-gnu/bits/struct_stat.h \
-    /usr/include/x86_64-linux-gnu/bits/fcntl2.h \
-    /usr/local/cuda-12.6/bin/../targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxInitDecls.h \
-    /usr/local/cuda-12.6/bin/../targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxImplCore.h \
-    /usr/local/cuda-12.6/bin/../targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxInitDefs.h \
-    /usr/local/cuda-12.6/bin/../targets/x86_64-linux/include/nvtx3/nvtxDetail/nvtxInit.h \
     /home/intern-04/binius-gpu/src/ulvt/sumcheck/test/./verifier.cuh \
     /home/intern-04/binius-gpu/src/ulvt/sumcheck/test/utils/bigints.cuh

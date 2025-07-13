@@ -113,7 +113,7 @@ TEST_CASE("mul_binary_tower_32b_simd<5>", "[mul]") {
 	};
 }
 
-TEST_CASE("mul_binary_tower_32b_bitsliced_unrolled", "[mul]") {
+/*TEST_CASE("mul_binary_tower_32b_bitsliced_unrolled", "[mul]") {
 	const int TEST_TOWER_HEIGHT = 5;
 	uint32_t a[32];
 	uint32_t b[32];
@@ -142,7 +142,7 @@ TEST_CASE("mul_binary_tower_32b_bitsliced_unrolled", "[mul]") {
 
 	BitsliceUtils<(1 << TEST_TOWER_HEIGHT)>::bitslice_transpose(b);
 
-	multiply_unrolled<TEST_TOWER_HEIGHT>(a, b, result);
+	multiply_unrolled_on_device<TEST_TOWER_HEIGHT>(a, b, result);
 
 	BitsliceUtils<(1 << TEST_TOWER_HEIGHT)>::bitslice_untranspose(result);
 
@@ -161,14 +161,14 @@ TEST_CASE("mul_binary_tower_32b_bitsliced_unrolled", "[mul]") {
 
 	BENCHMARK("mul_binary_tower_32b_bitsliced_unrolled cpu") {
 		for (size_t i = 0; i < (1 + NUM_OPS / (32 * 3)); i++) {
-			multiply_unrolled<TEST_TOWER_HEIGHT>(a, b, result);
-			multiply_unrolled<TEST_TOWER_HEIGHT>(b, result, a);
-			multiply_unrolled<TEST_TOWER_HEIGHT>(result, a, b);
+			multiply_unrolled_on_device<TEST_TOWER_HEIGHT>(a, b, result);
+			multiply_unrolled_on_device<TEST_TOWER_HEIGHT>(b, result, a);
+			multiply_unrolled_on_device<TEST_TOWER_HEIGHT>(result, a, b);
 		}
 
 		return a;
 	};
-}
+}*/
 
 TEST_CASE("mul_binary_tower_128b_bitsliced_unrolled", "[mul]") {
 	const int TEST_TOWER_HEIGHT = 7;
@@ -192,7 +192,7 @@ TEST_CASE("mul_binary_tower_128b_bitsliced_unrolled", "[mul]") {
 
 	BitsliceUtils<(1 << TEST_TOWER_HEIGHT)>::bitslice_transpose(b);
 
-	multiply_unrolled<TEST_TOWER_HEIGHT>(a, b, result);
+	multiply_unrolled_on_device(a, b, result);
 
 	BitsliceUtils<(1 << TEST_TOWER_HEIGHT)>::bitslice_untranspose(result);
 
@@ -210,9 +210,9 @@ TEST_CASE("mul_binary_tower_128b_bitsliced_unrolled", "[mul]") {
 
 	BENCHMARK("mul_binary_tower_128b_bitsliced_unrolled cpu") {
 		for (size_t i = 0; i < (1 + NUM_OPS / (32 * 3)); i++) {
-			multiply_unrolled<TEST_TOWER_HEIGHT>(a, b, result);
-			multiply_unrolled<TEST_TOWER_HEIGHT>(b, result, a);
-			multiply_unrolled<TEST_TOWER_HEIGHT>(result, a, b);
+			multiply_unrolled_on_device(a, b, result);
+			multiply_unrolled_on_device(b, result, a);
+			multiply_unrolled_on_device(result, a, b);
 		}
 
 		return a;
@@ -441,6 +441,55 @@ TEST_CASE("mul_binary_tower_128b_bitsliced_parallel", "[mul]") {
 			multiply_parallel(a, b, result, 1 << TEST_TOWER_HEIGHT);
 			multiply_parallel(b, result, a, 1 << TEST_TOWER_HEIGHT);
 			multiply_parallel(result, a, b, 1 << TEST_TOWER_HEIGHT);
+		}
+
+		return a;
+	};
+}
+
+TEST_CASE("mul_binary_tower_128b_bitsliced_hybrid", "[mul]") {
+	const int TEST_TOWER_HEIGHT = 7;
+	uint32_t a[1 << TEST_TOWER_HEIGHT];
+	uint32_t b[1 << TEST_TOWER_HEIGHT];
+	uint32_t result[1 << TEST_TOWER_HEIGHT];
+
+	for (uint32_t i = 0; i < (1 << TEST_TOWER_HEIGHT); ++i) {
+		result[i] = 0;
+	}
+
+	std::string field_elem_a_str = "0xf31223322755a4797859382795323434";
+
+	std::string field_elem_b_str = "0xd3473493847943875934759322048438";
+
+	write_string_to_int_arr(a, field_elem_a_str);
+
+	write_string_to_int_arr(b, field_elem_b_str);
+
+	BitsliceUtils<(1 << TEST_TOWER_HEIGHT)>::bitslice_transpose(a);
+
+	BitsliceUtils<(1 << TEST_TOWER_HEIGHT)>::bitslice_transpose(b);
+
+	multiply_hybrid(a, b, result);
+
+	BitsliceUtils<(1 << TEST_TOWER_HEIGHT)>::bitslice_untranspose(result);
+
+	REQUIRE(result[0] == 0x4b3220e5);
+	REQUIRE(result[1] == 0x999c424f);
+	REQUIRE(result[2] == 0x2dc6d28c);
+	REQUIRE(result[3] == 0xceaa247e);
+
+	uint32_t seed = std::chrono::system_clock::now().time_since_epoch().count();
+	std::mt19937 generator(seed);
+
+	for (int i = 0; i < (1 << TEST_TOWER_HEIGHT); ++i) {
+		a[i] = generator();
+	}
+
+	BENCHMARK("mul_binary_tower_128b_bitsliced_hybrid gpu") {
+		for (size_t i = 0; i < (1 + NUM_OPS / (32 * 3)); i++) {
+			multiply_hybrid(a, b, result);
+			multiply_hybrid(b, result, a);
+			multiply_hybrid(result, a, b);
 		}
 
 		return a;

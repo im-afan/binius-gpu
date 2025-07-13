@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include "binary_tower_rolled.cuh"
 #include "../constants.hpp"
+#include "binary_tower_unrolled.cuh"
+
+#define HEIGHT 7
 
 #define check(ans) { gpuAssert((ans), __FILE__, __LINE__); }
 inline void gpuAssert(cudaError_t code, const char *file, int line, bool abort=true)
@@ -24,7 +27,7 @@ __host__ __device__ void add(const uint32_t* a, const uint32_t* b, const uint32_
         destination[i] = a[i] ^ b[i] ^ c[i];
 }
 
-__host__ __device__ void multiply_alpha(const uint32_t* field_element, uint32_t* destination, uint32_t num_bits) {
+__host__ __device__ void multiply_alpha(const uint32_t* field_element, uint32_t* destination, uint32_t num_bits) { // todo unrolled
     // z2 * x_{k-1} in F_{2^k}
     // let L + R*x_{k-1} = z2
     // (L + R*x_{k-1}) * x_{k-1} = L*x_{k-1} + R*(x_{k-1}*x_{k-2}+1)
@@ -45,6 +48,12 @@ __host__ __device__ void multiply_alpha(const uint32_t* field_element, uint32_t*
             }
         }
     }
+}
+
+__host__ __device__ void compose_partials(const uint32_t* z0, const uint32_t* z2, const uint32_t* z3, const uint32_t* z2_alpha, uint32_t* destination, uint32_t idx, uint32_t num_bits) {
+    int r_idx = idx + (num_bits>>1);
+    destination[idx] = z0[idx] ^ z2[idx];
+    destination[r_idx] = z3[idx] ^ z2[idx] ^ z0[idx] ^ z2_alpha[idx];
 }
 
 __host__ __device__ void multiply_rolled(const uint32_t* field_element_a, const uint32_t* field_element_b, uint32_t* destination, uint32_t num_bits) { // TODO unrolled naive multiplication
@@ -185,7 +194,7 @@ __global__ void multiply_kernel_compose(const uint32_t* decomposed, uint32_t* de
     }
 }
 
-__host__ __device__ void multiply_parallel(const uint32_t* field_element_a, const uint32_t* field_element_b, uint32_t* destination, uint32_t num_bits) { // TODO streaming
+void multiply_parallel(const uint32_t* field_element_a, const uint32_t* field_element_b, uint32_t* destination, uint32_t num_bits) { // TODO streaming
     uint32_t* a_d;
     uint32_t* b_d;
     uint32_t* decomposition;
@@ -213,5 +222,120 @@ __host__ __device__ void multiply_parallel(const uint32_t* field_element_a, cons
     }
     //printf("final idx %d out of %d, there are %d bits.\n", idx, num_bits*num_bits, num_bits);
     check(cudaMemcpy(destination, decomposition + idx, num_bits * sizeof(uint32_t), cudaMemcpyDeviceToHost));
+}
 
+//template<int HEIGHT>
+__global__ void multiply_unrolled_kernel(const uint32_t* field_element_a, const uint32_t* field_element_b, uint32_t* destination) {
+    //uint32_t HEIGHT = 7;
+    multiply_unrolled<HEIGHT>(field_element_a, field_element_b, destination);
+}
+
+__global__ void multiply_hybrid_kernel(const uint32_t* field_element_a, const uint32_t* field_element_b, uint32_t* destination, uint32_t num_bits) { // each thread out of 3 does a 6-height multiplication. launch with 128 threads for shared memory.
+    // bits 0-127: a, last 64 bits is La ^ Ra
+    int half_num_bits = num_bits >> 1;
+    int quarter_num_bits = num_bits >> 2;
+
+    __shared__ uint32_t a_s6[3*64]; // L, R, F (2^6 bits each)
+    __shared__ uint32_t b_s6[3*64];
+    __shared__ uint32_t a_s5[9*32]; // LL, LR, RL, RR, FL, FR, LF, RF, FF (2^5 bits each)
+    __shared__ uint32_t b_s5[9*32];
+    __shared__ uint32_t partials5[16 * 32]; // partials at lowest unrolled multiplication level (5 tower height)
+    __shared__ uint32_t partials6[4 * 64]; // next level (6 tower height) (composition of partials5)
+    // 1728 ints of shared memory
+
+    int tid = threadIdx.x; // assume 1 block for testing
+
+    a_s6[tid] = field_element_a[tid];
+    b_s6[tid] = field_element_b[tid];
+    
+    if(tid < 64) {
+        a_s6[tid + 128] = field_element_a[tid] ^ field_element_a[tid + 64];
+        b_s6[tid + 128] = field_element_b[tid] ^ field_element_b[tid + 64];
+    }
+
+    __syncthreads();
+
+    a_s5[tid] = a_s6[tid]; // LL, LR, RL, RR
+    b_s5[tid] = b_s6[tid];
+
+    if(tid < 64) {
+        a_s5[tid + 128] = a_s6[tid + 128]; // FL, FR (fold then left)
+        b_s5[tid + 128] = b_s6[tid + 128];
+       
+    }
+
+    if(tid < 32) {
+        a_s5[tid + 192] = a_s6[tid] ^ a_s6[tid + 32]; // LF
+        b_s5[tid + 192] = b_s6[tid] ^ b_s6[tid + 32]; 
+
+        a_s5[tid + 192 + 32] = a_s6[tid + 64] ^ a_s6[tid + 64 + 32]; // RF
+        b_s5[tid + 192 + 32] = b_s6[tid + 64] ^ b_s6[tid + 64 + 32]; 
+
+        a_s5[tid + 192 + 64] = a_s6[tid + 128] ^ a_s6[tid + 128 + 32]; // FF
+        b_s5[tid + 192 + 64] = b_s6[tid + 128] ^ b_s6[tid + 128 + 32];
+    }
+
+    __syncthreads();
+
+    if(tid < 6) {
+        multiply_unrolled<5>(a_s5 + tid*quarter_num_bits, b_s5 + tid*quarter_num_bits, partials5 + tid*quarter_num_bits);
+    }
+    if(tid < 3) {
+        multiply_alpha(partials5 + (2*tid + 1)*quarter_num_bits, partials5 + (6+tid)*quarter_num_bits, quarter_num_bits); // todo multithreaded multiply_alpha kernel should be doable
+    }
+
+    __syncthreads();
+
+    if(tid < 64) {
+
+    }
+
+    /*if(tid < 3) {
+        multiply_unrolled<6>(a_s + tid*half_num_bits, b_s + tid*half_num_bits, partials6 + tid*half_num_bits); // need a way to balance load. study circuit generator code.
+    } 
+    __syncthreads();
+    if(tid == 0) {
+        multiply_alpha(partials + half_num_bits, partials + 3*half_num_bits, half_num_bits);
+    }*/
+
+
+
+    if(tid < 64) {
+        compose_partials(partials6, partials6 + half_num_bits, partials6 + 2*half_num_bits, partials6 + 3*half_num_bits, destination, tid, num_bits);
+    }
+}
+
+void multiply_hybrid(const uint32_t* field_element_a, const uint32_t* field_element_b, uint32_t* destination) {
+    uint32_t num_bits = 1 << HEIGHT;
+    uint32_t* a_d;
+    uint32_t* b_d;
+    uint32_t* destination_d;
+    check(cudaMalloc(&a_d, num_bits * sizeof(uint32_t)));
+    check(cudaMalloc(&b_d, num_bits * sizeof(uint32_t)));
+    check(cudaMalloc(&destination_d, num_bits * sizeof(uint32_t)));
+    check(cudaMemcpy(a_d, field_element_a, num_bits * sizeof(uint32_t), cudaMemcpyHostToDevice));
+    check(cudaMemcpy(b_d, field_element_b, num_bits * sizeof(uint32_t), cudaMemcpyHostToDevice));
+
+    multiply_hybrid_kernel<<<1, 128>>>(a_d, b_d, destination_d, num_bits);
+    check(cudaDeviceSynchronize());
+    check(cudaMemcpy(destination, destination_d, num_bits * sizeof(uint32_t), cudaMemcpyDeviceToHost));
+}
+
+//template<int HEIGHT>
+void multiply_unrolled_on_device(const uint32_t* field_element_a, const uint32_t* field_element_b, uint32_t* destination) {
+    //uint32_t HEIGHT = 7;
+    uint32_t num_bits = 1 << HEIGHT;
+    uint32_t* a_d;
+    uint32_t* b_d;
+    uint32_t* destination_d;
+    check(cudaMalloc(&a_d, num_bits * sizeof(uint32_t)));
+    check(cudaMalloc(&b_d, num_bits * sizeof(uint32_t)));
+    check(cudaMalloc(&destination_d, num_bits * sizeof(uint32_t)));
+    check(cudaMemcpy(a_d, field_element_a, num_bits * sizeof(uint32_t), cudaMemcpyHostToDevice));
+    check(cudaMemcpy(b_d, field_element_b, num_bits * sizeof(uint32_t), cudaMemcpyHostToDevice));
+
+    multiply_unrolled_kernel<<<1, 1>>>(a_d, b_d, destination_d);
+
+    check(cudaDeviceSynchronize());
+    check(cudaMemcpy(destination, destination_d, num_bits * sizeof(uint32_t), cudaMemcpyDeviceToHost));
 }

@@ -233,13 +233,9 @@ __global__ void multiply_unrolled_kernel(const uint32_t* field_element_a, const 
 __global__ void multiply_hybrid_kernel(const uint32_t* field_element_a, const uint32_t* field_element_b, uint32_t* destination, uint32_t num_bits) { // each thread out of 3 does a 6-height multiplication. launch with 128 threads for shared memory.
     // bits 0-127: a, last 64 bits is La ^ Ra
     int half_num_bits = num_bits >> 1;
-    int quarter_num_bits = num_bits >> 2;
 
     __shared__ uint32_t a_s6[3*64]; // L, R, F (2^6 bits each)
     __shared__ uint32_t b_s6[3*64];
-    __shared__ uint32_t a_s5[9*32]; // LL, LR, RL, RR, FL, FR, LF, RF, FF (2^5 bits each)
-    __shared__ uint32_t b_s5[9*32];
-    __shared__ uint32_t partials5[16 * 32]; // partials at lowest unrolled multiplication level (5 tower height)
     __shared__ uint32_t partials6[4 * 64]; // next level (6 tower height) (composition of partials5)
     // 1728 ints of shared memory
 
@@ -255,50 +251,15 @@ __global__ void multiply_hybrid_kernel(const uint32_t* field_element_a, const ui
 
     __syncthreads();
 
-    a_s5[tid] = a_s6[tid]; // LL, LR, RL, RR
-    b_s5[tid] = b_s6[tid];
-
-    if(tid < 64) {
-        a_s5[tid + 128] = a_s6[tid + 128]; // FL, FR (fold then left)
-        b_s5[tid + 128] = b_s6[tid + 128];
-       
-    }
-
-    if(tid < 32) {
-        a_s5[tid + 192] = a_s6[tid] ^ a_s6[tid + 32]; // LF
-        b_s5[tid + 192] = b_s6[tid] ^ b_s6[tid + 32]; 
-
-        a_s5[tid + 192 + 32] = a_s6[tid + 64] ^ a_s6[tid + 64 + 32]; // RF
-        b_s5[tid + 192 + 32] = b_s6[tid + 64] ^ b_s6[tid + 64 + 32]; 
-
-        a_s5[tid + 192 + 64] = a_s6[tid + 128] ^ a_s6[tid + 128 + 32]; // FF
-        b_s5[tid + 192 + 64] = b_s6[tid + 128] ^ b_s6[tid + 128 + 32];
-    }
-
-    __syncthreads();
-
-    if(tid < 6) {
-        multiply_unrolled<5>(a_s5 + tid*quarter_num_bits, b_s5 + tid*quarter_num_bits, partials5 + tid*quarter_num_bits);
-    }
     if(tid < 3) {
-        multiply_alpha(partials5 + (2*tid + 1)*quarter_num_bits, partials5 + (6+tid)*quarter_num_bits, quarter_num_bits); // todo multithreaded multiply_alpha kernel should be doable
-    }
-
-    __syncthreads();
-
-    if(tid < 64) {
-
-    }
-
-    /*if(tid < 3) {
-        multiply_unrolled<6>(a_s + tid*half_num_bits, b_s + tid*half_num_bits, partials6 + tid*half_num_bits); // need a way to balance load. study circuit generator code.
+        multiply_unrolled<6>(a_s6 + tid*half_num_bits, b_s6 + tid*half_num_bits, partials6 + tid*half_num_bits); // need a way to balance load. study circuit generator code.
     } 
     __syncthreads();
     if(tid == 0) {
-        multiply_alpha(partials + half_num_bits, partials + 3*half_num_bits, half_num_bits);
-    }*/
+        multiply_alpha(partials6 + half_num_bits, partials6 + 3*half_num_bits, half_num_bits);
+    }
 
-
+    __syncthreads();
 
     if(tid < 64) {
         compose_partials(partials6, partials6 + half_num_bits, partials6 + 2*half_num_bits, partials6 + 3*half_num_bits, destination, tid, num_bits);

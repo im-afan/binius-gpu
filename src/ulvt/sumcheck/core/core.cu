@@ -2,10 +2,24 @@
 #include <iostream>
 
 #include "../../finite_fields/circuit_generator/unrolled/binary_tower_unrolled.cuh"
+#include "../../finite_fields/circuit_generator/unrolled/binary_tower_rolled.cuh"
 #include "../../utils/bitslicing.cuh"
 #include "../utils/constants.hpp"
 #include "core.cuh"
 #include <nvtx3/nvToolsExt.h>
+
+__host__ void evaluate_composition_on_batch_row_parallel(
+	const uint32_t* batches, // all arrays expected to be on device
+	uint32_t* destination, // all batch compositions instead of just 1 btw
+	const uint32_t composition_size,
+	const uint32_t original_evals_per_col
+) {
+	cudaMemcpy(destination, batches, original_evals_per_col * INTS_PER_VALUE * sizeof(uint32_t), cudaMemcpyDeviceToDevice);
+	for(int i = 1; i < composition_size; ++i) {
+		const uint32_t* ith_batches = batches + i * original_evals_per_col * INTS_PER_VALUE;
+		//multiply_parallel()
+	}
+}
 
 __host__ __device__ void evaluate_composition_on_batch_row( // after folding, calculate the claimed sum over hypercube by multiplying the individual multilinear evaluations
 	const uint32_t* first_batch_of_row, // THIS IS THE BIGGEST OPTIMIZATION OPPORTUNITY

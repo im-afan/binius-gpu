@@ -10,6 +10,14 @@ __host__ __device__ void evaluate_composition_on_batch_row(
 	const uint32_t original_evals_per_col
 );
 
+
+__host__ __device__ void evaluate_composition_on_batch_row_gpu(
+	const uint32_t* first_batch_of_row,
+	uint32_t* batch_composition_destination,
+	const uint32_t composition_size,
+	const uint32_t original_evals_per_col
+);
+
 __host__ __device__ void fold_batch(
 	const uint32_t lower_batch[BITS_WIDTH],
 	const uint32_t upper_batch[BITS_WIDTH],

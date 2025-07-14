@@ -1,7 +1,6 @@
 #include <cstdint>
 
 #include "../utils/constants.hpp"
-#include <nvtx3/nvToolsExt.h>
 
 template <uint32_t INTERPOLATION_POINTS, uint32_t COMPOSITION_SIZE, uint32_t EVALS_PER_MULTILINEAR>
 __global__ void compute_compositions( // evaluates Si(Xi) at multiple points and gets the claimed sum
@@ -96,9 +95,9 @@ __global__ void compute_compositions( // evaluates Si(Xi) at multiple points and
 
 			// Take the folded batches and evaluate the compositions on them
 			// find p1p2....pd at each point for each folded polynomial
+			uint32_t this_interpolation_point_product_batch[BITS_WIDTH];
 			for (int interpolation_point = 0; interpolation_point < INTERPOLATION_POINTS; ++interpolation_point) {
 				// composition batch for this interpolation point.
-				uint32_t this_interpolation_point_product_batch[BITS_WIDTH];
 				
 				// find the product of each hypercube batch. (p1p2...pd) 
 				evaluate_composition_on_batch_row( // THIS IS THE BIGGEST SLOWDOWN

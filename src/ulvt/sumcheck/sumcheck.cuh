@@ -123,6 +123,10 @@ public:
 		if (benchmarking) {
 			start_raw = std::chrono::high_resolution_clock::now();
 		}
+
+		/*cudaMalloc(&this_interpolation_point_product_batch_global, BITS_WIDTH * BLOCKS * THREADS_PER_BLOCK * sizeof(uint32_t));
+		cudaMalloc(&this_multilinear_product_global, BITS_WIDTH * BLOCKS * THREADS_PER_BLOCK * sizeof(uint32_t));
+		cudaMalloc(&folded_batch_row_global, 5 * 4 * BITS_WIDTH * BLOCKS * THREADS_PER_BLOCK);*/
 	}
 
 	~Sumcheck() { delete[] cpu_multilinear_evaluations; }

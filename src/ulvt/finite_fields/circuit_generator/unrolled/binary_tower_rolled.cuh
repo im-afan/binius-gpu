@@ -12,4 +12,7 @@ void multiply_parallel(const uint32_t* field_element_a, const uint32_t* field_el
 void multiply_hybrid(const uint32_t* field_element_a, const uint32_t* field_element_b, uint32_t* destination);
 
 //template <uint32_t HEIGHT>
+
+__global__ void multiply_hybrid_kernel(const uint32_t* field_element_a, const uint32_t* field_element_b, uint32_t* destination, uint32_t num_bits);
+__global__ void multiply_then_add_kernel(const uint32_t* field_element_a, const uint32_t* field_element_b, uint32_t* destination, uint32_t num_bits);
 void multiply_unrolled_on_device(const uint32_t* field_element_a, const uint32_t* field_element_b, uint32_t* destination);

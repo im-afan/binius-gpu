@@ -8,17 +8,33 @@
 #include "core.cuh"
 #include <nvtx3/nvToolsExt.h>
 
-__host__ void evaluate_composition_on_batch_row_parallel(
+template <uint32_t INTERPOLATION_POINTS, uint32_t COMPOSITION_SIZE, uint32_t EVALS_PER_MULTILINEAR>
+__host__ void compute_compositions_then_sum(
+	// organized by multiple 32x128 batches for P1, followed by many 32x128 for P2, etc
+	const uint32_t* multilinear_evaluations, // d x 2^n table representing the 3 multiplied hypercubes
+	uint32_t* multilinear_products_sums, 
+	uint32_t* folded_products_sums,
+	const uint32_t coefficients[INTERPOLATION_POINTS * BITS_WIDTH],
+	const uint32_t num_batches 
+) {
+	
+}
+
+__host__ void evaluate_composition_on_batch_row_then_sum(
 	const uint32_t* batches, // all arrays expected to be on device
 	uint32_t* destination, // all batch compositions instead of just 1 btw
 	const uint32_t composition_size,
-	const uint32_t original_evals_per_col
+	const uint32_t num_batches 
 ) {
-	cudaMemcpy(destination, batches, original_evals_per_col * INTS_PER_VALUE * sizeof(uint32_t), cudaMemcpyDeviceToDevice);
-	for(int i = 1; i < composition_size; ++i) {
-		const uint32_t* ith_batches = batches + i * original_evals_per_col * INTS_PER_VALUE;
-		//multiply_parallel()
+	uint32_t* composition;
+	cudaMalloc(&composition, num_batches * BITS_WIDTH * sizeof(uint32_t));
+	cudaMemcpy(composition, batches, num_batches * BITS_WIDTH * sizeof(uint32_t), cudaMemcpyDeviceToDevice);
+	for(int i = 1; i < composition_size - 1; ++i) {
+		const uint32_t* ith_batches = batches + i * num_batches * BITS_WIDTH;
+		multiply_hybrid_kernel<<<num_batches, 128>>>(composition, ith_batches, composition, 1 << TOWER_HEIGHT);	
 	}
+	const uint32_t* ith_batches = batches + (composition_size-1) * num_batches * BITS_WIDTH;
+	multiply_then_add_kernel<<<num_batches, 128>>>(composition, ith_batches, destination, 1 << TOWER_HEIGHT);
 }
 
 __host__ __device__ void evaluate_composition_on_batch_row( // after folding, calculate the claimed sum over hypercube by multiplying the individual multilinear evaluations

@@ -2,6 +2,8 @@
 
 #include "../utils/constants.hpp"
 
+
+
 template <uint32_t INTERPOLATION_POINTS, uint32_t COMPOSITION_SIZE, uint32_t EVALS_PER_MULTILINEAR>
 __global__ void compute_compositions( // evaluates Si(Xi) at multiple points and gets the claimed sum
 	// organized by multiple 32x128 batches for P1, followed by many 32x128 for P2, etc

@@ -129,7 +129,6 @@ __host__ __device__ void multiply_rolled_karatsuba(const uint32_t* field_element
     }        
 }
 
-
 __global__ void multiply_kernel_decompose(const uint32_t* field_element_a, const uint32_t* field_element_b, uint32_t* destination, uint32_t num_bits) {
     __shared__ uint32_t a_s[16], b_s[16];
     __shared__ uint32_t ab_s[16*16];
@@ -333,9 +332,114 @@ __global__ void multiply_hybrid_kernel(const uint32_t* field_element_a, const ui
     __syncthreads();
 
     if(tid < 64) {
-        compose_partials(partials6, partials6 + half_num_bits, partials6 + 2*half_num_bits, partials6 + 3*half_num_bits, destination, tid, num_bits);
+        compose_partials(partials6, partials6 + half_num_bits, partials6 + 2*half_num_bits, partials6 + 3*half_num_bits, destination + bid*128, tid, num_bits);
     }
 }
+
+
+__global__ void multiply_then_add_kernel(const uint32_t* field_element_a, const uint32_t* field_element_b, uint32_t* destination, uint32_t num_bits) { // each thread out of 3 does a 6-height multiplication. launch with 128 threads for shared memory.
+    // bits 0-127: a, last 64 bits is La ^ Ra
+    int half_num_bits = num_bits >> 1;
+    int quarter_num_bits = num_bits >> 2;
+
+    __shared__ uint32_t a_s6[3*64]; // L, R, F (2^6 bits each)
+    __shared__ uint32_t b_s6[3*64];
+    __shared__ uint32_t a_s5[9*32]; // LL, LR, RL, RR, FL, FR, LF, RF, FF (2^5 bits each)
+    __shared__ uint32_t b_s5[9*32];
+    __shared__ uint32_t partials5[16 * 32]; // partials at lowest unrolled multiplication level (5 tower height)
+    __shared__ uint32_t partials6[4 * 64]; // next level (6 tower height) (composition of partials5)
+    __shared__ uint32_t batch_product[128];
+    // 1728 ints of shared memory
+    
+    int tid = threadIdx.x; // assume 1 block for testing
+    int bid = blockIdx.x;
+
+    for(int i = 1; i <= 4; i++) {
+        int idx = tid + i*blockDim.x;
+        if(idx < 16*32) partials5[idx] = 0;
+        if(idx < 4*64) partials6[idx] = 0;
+    }
+
+    a_s6[tid + bid * 128] = field_element_a[tid + bid * 128];
+    b_s6[tid + bid * 128] = field_element_b[tid + bid * 128];
+    
+    if(tid < 64) {
+        a_s6[tid + 128] = field_element_a[tid + bid * 128] ^ field_element_a[tid + 64 + bid * 128];
+        b_s6[tid + 128] = field_element_b[tid + bid * 128] ^ field_element_b[tid + 64 + bid * 128];
+    }
+
+    __syncthreads();
+
+    a_s5[tid] = a_s6[tid]; // LL, LR, RL, RR
+    b_s5[tid] = b_s6[tid];
+
+    if(tid < 64) {
+        a_s5[tid + 128] = a_s6[tid + 128]; // FL, FR (fold then left)
+        b_s5[tid + 128] = b_s6[tid + 128];
+    }
+
+    if(tid < 32) {
+        a_s5[tid + 192] = a_s6[tid] ^ a_s6[tid + 32]; // LF
+        b_s5[tid + 192] = b_s6[tid] ^ b_s6[tid + 32]; 
+    }
+    if(tid >= 32 && tid < 64) {
+        int tmp_tid = tid - 32;
+        a_s5[tmp_tid + 192 + 32] = a_s6[tmp_tid + 64] ^ a_s6[tmp_tid + 64 + 32]; // RF
+        b_s5[tmp_tid + 192 + 32] = b_s6[tmp_tid + 64] ^ b_s6[tmp_tid + 64 + 32]; 
+    }
+    if(tid >= 64 && tid < 96) {
+        int tmp_tid = tid - 64;
+        a_s5[tmp_tid + 192 + 64] = a_s6[tmp_tid + 128] ^ a_s6[tmp_tid + 128 + 32]; // FF
+        b_s5[tmp_tid + 192 + 64] = b_s6[tmp_tid + 128] ^ b_s6[tmp_tid + 128 + 32];
+    }
+
+    __syncthreads();
+
+    if(tid < 9) {
+        multiply_unrolled<5>(a_s5 + tid*quarter_num_bits, b_s5 + tid*quarter_num_bits, partials5 + tid*quarter_num_bits);
+    }
+
+    __syncthreads();
+
+    if(tid < 32) {
+        multiply_alpha_bit(partials5 + 1*quarter_num_bits, partials5 + 9*quarter_num_bits, quarter_num_bits, tid);
+    }
+    if(tid >= 32 && tid < 64) {
+        multiply_alpha_bit(partials5 + 3*quarter_num_bits, partials5 + 10*quarter_num_bits, quarter_num_bits, tid-32);
+    }
+    if(tid >= 64 && tid < 96) {
+        multiply_alpha_bit(partials5 + 5*quarter_num_bits, partials5 + 11*quarter_num_bits, quarter_num_bits, tid-64);
+    }
+
+    __syncthreads();
+
+    if(tid < 32) {
+        compose_partials(partials5, partials5 + quarter_num_bits, partials5 + 6*quarter_num_bits, partials5 + 9*quarter_num_bits, partials6, tid, half_num_bits);
+    }
+    if(tid >= 32 && tid < 64) {
+        int tmp_tid = tid - 32;
+        compose_partials(partials5 + 2*quarter_num_bits, partials5 + 3*quarter_num_bits, partials5 + 7*quarter_num_bits, partials5 + 10*quarter_num_bits, partials6+half_num_bits, tmp_tid, half_num_bits);
+    }
+    if(tid >= 64 && tid < 96) {
+        int tmp_tid = tid - 64;
+        compose_partials(partials5 + 4*quarter_num_bits, partials5 + 5*quarter_num_bits, partials5 + 8*quarter_num_bits, partials5 + 11*quarter_num_bits, partials6+2*half_num_bits, tmp_tid, half_num_bits);
+    }
+
+    __syncthreads();
+
+    if(tid < 64) {
+        multiply_alpha_bit(partials6 + half_num_bits, partials6 + 3*half_num_bits, half_num_bits, tid);
+    }
+
+    __syncthreads();
+
+    if(tid < 64) {
+        compose_partials(partials6, partials6 + half_num_bits, partials6 + 2*half_num_bits, partials6 + 3*half_num_bits, batch_product, tid, num_bits);
+    }
+    atomicXor(destination + tid, batch_product[tid]);
+}
+
+
 
 void multiply_hybrid(const uint32_t* field_element_a, const uint32_t* field_element_b, uint32_t* destination) {
     uint32_t num_bits = 1 << HEIGHT;

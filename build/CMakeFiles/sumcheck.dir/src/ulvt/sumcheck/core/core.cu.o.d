@@ -289,6 +289,7 @@ CMakeFiles/sumcheck.dir/src/ulvt/sumcheck/core/core.cu.o : /home/intern-04/biniu
     /usr/include/c++/12/istream \
     /usr/include/c++/12/bits/istream.tcc \
     /home/intern-04/binius-gpu/src/ulvt/sumcheck/core/../../finite_fields/circuit_generator/unrolled/binary_tower_unrolled.cuh \
+    /home/intern-04/binius-gpu/src/ulvt/sumcheck/core/../../finite_fields/circuit_generator/unrolled/binary_tower_rolled.cuh \
     /home/intern-04/binius-gpu/src/ulvt/sumcheck/core/../../utils/bitslicing.cuh \
     /usr/include/c++/12/array \
     /usr/include/c++/12/cstring \

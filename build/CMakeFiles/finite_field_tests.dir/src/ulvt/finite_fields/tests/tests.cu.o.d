@@ -385,6 +385,7 @@ CMakeFiles/finite_field_tests.dir/src/ulvt/finite_fields/tests/tests.cu.o : /hom
     /usr/include/c++/12/bit \
     /usr/include/c++/12/pstl/glue_numeric_defs.h \
     /home/intern-04/binius-gpu/src/ulvt/finite_fields/tests/../circuit_generator/unrolled/binary_tower_unrolled.cuh \
+    /home/intern-04/binius-gpu/src/ulvt/finite_fields/tests/../circuit_generator/unrolled/binary_tower_rolled.cuh \
     /home/intern-04/binius-gpu/src/ulvt/finite_fields/tests/../../utils/bitslicing.cuh \
     /usr/include/c++/12/array \
     /home/intern-04/binius-gpu/src/ulvt/finite_fields/tests/../circuit_generator/utils/utils.hpp \

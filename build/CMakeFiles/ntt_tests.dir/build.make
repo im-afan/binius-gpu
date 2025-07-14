@@ -114,9 +114,9 @@ CMakeFiles/ntt_tests.dir/cmake_device_link.o: CMakeFiles/ntt_tests.dir/src/ulvt/
 CMakeFiles/ntt_tests.dir/cmake_device_link.o: CMakeFiles/ntt_tests.dir/src/ulvt/ntt/tests/test_ntt.cu.o
 CMakeFiles/ntt_tests.dir/cmake_device_link.o: CMakeFiles/ntt_tests.dir/build.make
 CMakeFiles/ntt_tests.dir/cmake_device_link.o: libulvt_gpu.a
-CMakeFiles/ntt_tests.dir/cmake_device_link.o: third-party/Catch2/src/libCatch2Main.so.3.5.0
+CMakeFiles/ntt_tests.dir/cmake_device_link.o: third-party/Catch2/src/libCatch2Main.a
 CMakeFiles/ntt_tests.dir/cmake_device_link.o: libunrolled.a
-CMakeFiles/ntt_tests.dir/cmake_device_link.o: third-party/Catch2/src/libCatch2.so.3.5.0
+CMakeFiles/ntt_tests.dir/cmake_device_link.o: third-party/Catch2/src/libCatch2.a
 CMakeFiles/ntt_tests.dir/cmake_device_link.o: CMakeFiles/ntt_tests.dir/deviceLinkLibs.rsp
 CMakeFiles/ntt_tests.dir/cmake_device_link.o: CMakeFiles/ntt_tests.dir/deviceObjects1.rsp
 CMakeFiles/ntt_tests.dir/cmake_device_link.o: CMakeFiles/ntt_tests.dir/dlink.txt
@@ -139,9 +139,9 @@ ntt_tests: CMakeFiles/ntt_tests.dir/src/ulvt/ntt/tests/md5.cu.o
 ntt_tests: CMakeFiles/ntt_tests.dir/src/ulvt/ntt/tests/test_ntt.cu.o
 ntt_tests: CMakeFiles/ntt_tests.dir/build.make
 ntt_tests: libulvt_gpu.a
-ntt_tests: third-party/Catch2/src/libCatch2Main.so.3.5.0
+ntt_tests: third-party/Catch2/src/libCatch2Main.a
 ntt_tests: libunrolled.a
-ntt_tests: third-party/Catch2/src/libCatch2.so.3.5.0
+ntt_tests: third-party/Catch2/src/libCatch2.a
 ntt_tests: CMakeFiles/ntt_tests.dir/cmake_device_link.o
 ntt_tests: CMakeFiles/ntt_tests.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable ntt_tests"

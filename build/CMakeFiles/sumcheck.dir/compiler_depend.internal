@@ -3,6 +3,7 @@
 
 CMakeFiles/sumcheck.dir/src/ulvt/sumcheck/core/core.cu.o
  /home/intern-04/binius-gpu/src/ulvt/sumcheck/core/core.cu
+ /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cuh
  /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled.cuh
  /home/intern-04/binius-gpu/src/ulvt/utils/bitslicing.cuh
  /home/intern-04/binius-gpu/src/ulvt/sumcheck/utils/constants.hpp

@@ -1425,6 +1425,7 @@ CMakeFiles/finite_field_tests.dir/src/ulvt/finite_fields/tests/tests.cu.o: /home
   /home/intern-04/binius-gpu/src/ulvt/finite_fields/binary_tower_simd.cuh \
   third-party/Catch2/generated-includes/catch2/catch_user_config.hpp \
   /home/intern-04/binius-gpu/src/ulvt/utils/bitslicing.cuh \
+  /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cuh \
   /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled.cuh \
   /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/utils/utils.hpp \
   /home/intern-04/binius-gpu/src/ulvt/finite_fields/baby_bear.cuh \
@@ -2161,6 +2162,8 @@ CMakeFiles/finite_field_tests.dir/src/ulvt/finite_fields/tests/tests.cu.o: /home
 /home/intern-04/binius-gpu/src/ulvt/finite_fields/tests/profiling/kernels/babybear_repeat.cuh:
 
 /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/utils/utils.hpp:
+
+/home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cuh:
 
 /home/intern-04/binius-gpu/src/ulvt/finite_fields/tests/tests.cu:
 

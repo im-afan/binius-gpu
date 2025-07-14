@@ -1,5 +1,4 @@
 file(REMOVE_RECURSE
-  ".3.5.0"
   "CMakeFiles/Catch2.dir/catch2/benchmark/catch_chronometer.cpp.o"
   "CMakeFiles/Catch2.dir/catch2/benchmark/catch_chronometer.cpp.o.d"
   "CMakeFiles/Catch2.dir/catch2/benchmark/detail/catch_analyse.cpp.o"
@@ -212,9 +211,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Catch2.dir/catch2/reporters/catch_reporter_teamcity.cpp.o.d"
   "CMakeFiles/Catch2.dir/catch2/reporters/catch_reporter_xml.cpp.o"
   "CMakeFiles/Catch2.dir/catch2/reporters/catch_reporter_xml.cpp.o.d"
+  "libCatch2.a"
   "libCatch2.pdb"
-  "libCatch2.so"
-  "libCatch2.so.3.5.0"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -353,7 +353,7 @@ template <class Key, class T, class IgnoredLess = std::less<Key>,
     }
 
 private:
-    /* [NVBench Patch] JSON_NO_UNIQUE_ADDRESS */ key_compare m_compare = key_compare();
+    JSON_NO_UNIQUE_ADDRESS key_compare m_compare = key_compare();
 };
 
 NLOHMANN_JSON_NAMESPACE_END

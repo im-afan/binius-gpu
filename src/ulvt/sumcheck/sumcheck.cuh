@@ -204,6 +204,9 @@ public:
 				);
 			}
 		} else {
+			uint32_t* correct_gpu_multilinear_products;
+			uint32_t* correct_gpu_folded_products_sums;
+
 			cudaMalloc(&gpu_multilinear_products, BITS_WIDTH * sizeof(uint32_t));
 
 			cudaMemset(gpu_multilinear_products, 0, BITS_WIDTH * sizeof(uint32_t));
@@ -211,17 +214,25 @@ public:
 			cudaMalloc(&gpu_folded_products_sums, INTERPOLATION_POINTS * BITS_WIDTH * sizeof(uint32_t));
 
 			cudaMemset(gpu_folded_products_sums, 0, INTERPOLATION_POINTS * BITS_WIDTH * sizeof(uint32_t));
+			
+			cudaMalloc(&correct_gpu_folded_products_sums, INTERPOLATION_POINTS * BITS_WIDTH * sizeof(uint32_t));
+			
+			cudaMemset(correct_gpu_folded_products_sums, 0, INTERPOLATION_POINTS * BITS_WIDTH * sizeof(uint32_t));
+			
+			cudaMalloc(&correct_gpu_multilinear_products, BITS_WIDTH * sizeof(uint32_t));
+			cudaMemset(correct_gpu_multilinear_products, 0, BITS_WIDTH * sizeof(uint32_t));
 
-			/*compute_compositions<INTERPOLATION_POINTS, COMPOSITION_SIZE, EVALS_PER_MULTILINEAR>
+			compute_compositions<INTERPOLATION_POINTS, COMPOSITION_SIZE, EVALS_PER_MULTILINEAR>
 				<<<BLOCKS, THREADS_PER_BLOCK>>>(
 					gpu_multilinear_evaluations,
-					gpu_multilinear_products,
-					gpu_folded_products_sums,
+					correct_gpu_multilinear_products,
+					correct_gpu_folded_products_sums,
 					gpu_coefficients,
 					num_batches_per_multilinear,
 					active_threads,
 					active_threads_folded
-				);*/
+				);
+			cudaDeviceSynchronize();
 			compute_compositions_fine<INTERPOLATION_POINTS, COMPOSITION_SIZE, EVALS_PER_MULTILINEAR>(
 				gpu_multilinear_evaluations,
 				gpu_multilinear_products,
@@ -229,6 +240,19 @@ public:
 				gpu_coefficients,
 				num_batches_per_multilinear
 			);
+
+			uint32_t* cpu_correct_multilinear_products[BITS_WIDTH];
+			uint32_t* cpu_correct_folded_products_sums[INTERPOLATION_POINTS * BITS_WIDTH];
+			uint32_t* cpu_multilinear_products[BITS_WIDTH];
+			uint32_t* cpu_folded_products_sums[INTERPOLATION_POINTS * BITS_WIDTH];
+
+			cudaMemcpy(cpu_correct_multilinear_products, correct_gpu_multilinear_products, BITS_WIDTH * sizeof(uint32_t), cudaMemcpyDeviceToHost);
+			cudaMemcpy(cpu_correct_folded_products_sums, correct_gpu_folded_products_sums, INTERPOLATION_POINTS * BITS_WIDTH * sizeof(uint32_t), cudaMemcpyDeviceToHost);
+			cudaMemcpy(cpu_multilinear_products, gpu_multilinear_products, BITS_WIDTH * sizeof(uint32_t), cudaMemcpyDeviceToHost);
+			cudaMemcpy(cpu_folded_products_sums, gpu_folded_products_sums, INTERPOLATION_POINTS * BITS_WIDTH * sizeof(uint32_t), cudaMemcpyDeviceToHost);
+
+			printf("correct gpu multilinear product %d, got %d\n", cpu_correct_multilinear_products[10], cpu_multilinear_products[10]);
+			printf("correct gpu interpolation product %d, got %d\n", cpu_correct_folded_products_sums[10], cpu_folded_products_sums[10]);
 
 			cudaDeviceSynchronize();
 

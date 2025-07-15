@@ -1,2 +1,1 @@
-/usr/bin/ar qc libCatch2Main.a CMakeFiles/Catch2WithMain.dir/catch2/internal/catch_main.cpp.o
-/usr/bin/ranlib libCatch2Main.a
+/usr/bin/c++ -fPIC -O3 -DNDEBUG -shared -Wl,-soname,libCatch2Main.so.3.5.0 -o libCatch2Main.so.3.5.0 CMakeFiles/Catch2WithMain.dir/catch2/internal/catch_main.cpp.o  -Wl,-rpath,/home/intern-04/binius-gpu/build/third-party/Catch2/src libCatch2.so.3.5.0

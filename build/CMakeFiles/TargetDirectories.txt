@@ -5,6 +5,7 @@
 /home/intern-04/binius-gpu/build/CMakeFiles/ntt_tests.dir
 /home/intern-04/binius-gpu/build/CMakeFiles/finite_field_tests.dir
 /home/intern-04/binius-gpu/build/CMakeFiles/sumcheck_test.dir
+/home/intern-04/binius-gpu/build/CMakeFiles/prover_kernel_test.dir
 /home/intern-04/binius-gpu/build/CMakeFiles/sumcheck_bench.dir
 /home/intern-04/binius-gpu/build/CMakeFiles/gpu-benchmarks.dir
 /home/intern-04/binius-gpu/build/CMakeFiles/prime_fields_gpu.dir

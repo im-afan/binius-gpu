@@ -208,6 +208,19 @@ sumcheck_test/fast:
 .PHONY : sumcheck_test/fast
 
 #=============================================================================
+# Target rules for targets named prover_kernel_test
+
+# Build rule for target.
+prover_kernel_test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 prover_kernel_test
+.PHONY : prover_kernel_test
+
+# fast build rule for target.
+prover_kernel_test/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/prover_kernel_test.dir/build.make CMakeFiles/prover_kernel_test.dir/build
+.PHONY : prover_kernel_test/fast
+
+#=============================================================================
 # Target rules for targets named sumcheck_bench
 
 # Build rule for target.
@@ -915,6 +928,30 @@ src/ulvt/sumcheck/test/test.cu.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sumcheck_test.dir/build.make CMakeFiles/sumcheck_test.dir/src/ulvt/sumcheck/test/test.cu.s
 .PHONY : src/ulvt/sumcheck/test/test.cu.s
 
+src/ulvt/sumcheck/test/test_prover_kernels.o: src/ulvt/sumcheck/test/test_prover_kernels.cu.o
+.PHONY : src/ulvt/sumcheck/test/test_prover_kernels.o
+
+# target to build an object file
+src/ulvt/sumcheck/test/test_prover_kernels.cu.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/prover_kernel_test.dir/build.make CMakeFiles/prover_kernel_test.dir/src/ulvt/sumcheck/test/test_prover_kernels.cu.o
+.PHONY : src/ulvt/sumcheck/test/test_prover_kernels.cu.o
+
+src/ulvt/sumcheck/test/test_prover_kernels.i: src/ulvt/sumcheck/test/test_prover_kernels.cu.i
+.PHONY : src/ulvt/sumcheck/test/test_prover_kernels.i
+
+# target to preprocess a source file
+src/ulvt/sumcheck/test/test_prover_kernels.cu.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/prover_kernel_test.dir/build.make CMakeFiles/prover_kernel_test.dir/src/ulvt/sumcheck/test/test_prover_kernels.cu.i
+.PHONY : src/ulvt/sumcheck/test/test_prover_kernels.cu.i
+
+src/ulvt/sumcheck/test/test_prover_kernels.s: src/ulvt/sumcheck/test/test_prover_kernels.cu.s
+.PHONY : src/ulvt/sumcheck/test/test_prover_kernels.s
+
+# target to generate assembly for a file
+src/ulvt/sumcheck/test/test_prover_kernels.cu.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/prover_kernel_test.dir/build.make CMakeFiles/prover_kernel_test.dir/src/ulvt/sumcheck/test/test_prover_kernels.cu.s
+.PHONY : src/ulvt/sumcheck/test/test_prover_kernels.cu.s
+
 src/ulvt/sumcheck/test/utils/bigints.o: src/ulvt/sumcheck/test/utils/bigints.cu.o
 .PHONY : src/ulvt/sumcheck/test/utils/bigints.o
 
@@ -1033,6 +1070,7 @@ help:
 	@echo "... nvbench.main"
 	@echo "... prime_field_sumcheck"
 	@echo "... prime_fields_gpu"
+	@echo "... prover_kernel_test"
 	@echo "... sumcheck"
 	@echo "... sumcheck_bench"
 	@echo "... sumcheck_test"
@@ -1107,6 +1145,9 @@ help:
 	@echo "... src/ulvt/sumcheck/test/test.o"
 	@echo "... src/ulvt/sumcheck/test/test.i"
 	@echo "... src/ulvt/sumcheck/test/test.s"
+	@echo "... src/ulvt/sumcheck/test/test_prover_kernels.o"
+	@echo "... src/ulvt/sumcheck/test/test_prover_kernels.i"
+	@echo "... src/ulvt/sumcheck/test/test_prover_kernels.s"
 	@echo "... src/ulvt/sumcheck/test/utils/bigints.o"
 	@echo "... src/ulvt/sumcheck/test/utils/bigints.i"
 	@echo "... src/ulvt/sumcheck/test/utils/bigints.s"

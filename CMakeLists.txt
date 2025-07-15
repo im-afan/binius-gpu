@@ -37,6 +37,7 @@ file(GLOB finite_field_kernel_srcs "./src/ulvt/finite_fields/tests/profiling/ker
 file(GLOB finite_field_kernel_headers "./src/ulvt/finite_fields/tests/profiling/kernels/*.cuh")
 
 file(GLOB sumcheck_test_src "./src/ulvt/sumcheck/test/test.cu")
+file(GLOB prover_kernel_test_src "./src/ulvt/sumcheck/test/test_prover_kernels.cu")
 
 file(GLOB sumcheck_test_verifier_src "./src/ulvt/sumcheck/test/verifier.cu")
 file(GLOB sumcheck_test_verifier_header "./src/ulvt/sumcheck/test/verifier.cuh")
@@ -150,6 +151,14 @@ target_compile_options(sumcheck_test PRIVATE $<$<COMPILE_LANGUAGE:CUDA>:
                        >)
 set_target_properties(sumcheck_test PROPERTIES
         CUDA_SEPARABLE_COMPILATION ON)
+
+add_executable(prover_kernel_test ${prover_kernel_test_src})
+target_link_libraries(prover_kernel_test PRIVATE sumcheck Catch2::Catch2WithMain)
+target_compile_options(prover_kernel_test PRIVATE $<$<COMPILE_LANGUAGE:CUDA>:
+                       --generate-line-info
+                       --use_fast_math
+                       --relocatable-device-code=true
+                       >)
 
 add_executable(sumcheck_bench ${sumcheck_bench_srcs} )
 target_link_libraries(sumcheck_bench PRIVATE sumcheck Catch2::Catch2WithMain)

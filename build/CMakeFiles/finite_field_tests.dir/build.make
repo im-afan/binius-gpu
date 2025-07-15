@@ -131,9 +131,9 @@ CMakeFiles/finite_field_tests.dir/cmake_device_link.o: CMakeFiles/finite_field_t
 CMakeFiles/finite_field_tests.dir/cmake_device_link.o: CMakeFiles/finite_field_tests.dir/src/ulvt/finite_fields/tests/tests.cu.o
 CMakeFiles/finite_field_tests.dir/cmake_device_link.o: CMakeFiles/finite_field_tests.dir/build.make
 CMakeFiles/finite_field_tests.dir/cmake_device_link.o: libulvt_gpu.a
-CMakeFiles/finite_field_tests.dir/cmake_device_link.o: third-party/Catch2/src/libCatch2Main.a
+CMakeFiles/finite_field_tests.dir/cmake_device_link.o: third-party/Catch2/src/libCatch2Main.so.3.5.0
 CMakeFiles/finite_field_tests.dir/cmake_device_link.o: libunrolled.a
-CMakeFiles/finite_field_tests.dir/cmake_device_link.o: third-party/Catch2/src/libCatch2.a
+CMakeFiles/finite_field_tests.dir/cmake_device_link.o: third-party/Catch2/src/libCatch2.so.3.5.0
 CMakeFiles/finite_field_tests.dir/cmake_device_link.o: CMakeFiles/finite_field_tests.dir/deviceLinkLibs.rsp
 CMakeFiles/finite_field_tests.dir/cmake_device_link.o: CMakeFiles/finite_field_tests.dir/deviceObjects1.rsp
 CMakeFiles/finite_field_tests.dir/cmake_device_link.o: CMakeFiles/finite_field_tests.dir/dlink.txt
@@ -158,9 +158,9 @@ finite_field_tests: CMakeFiles/finite_field_tests.dir/src/ulvt/finite_fields/tes
 finite_field_tests: CMakeFiles/finite_field_tests.dir/src/ulvt/finite_fields/tests/tests.cu.o
 finite_field_tests: CMakeFiles/finite_field_tests.dir/build.make
 finite_field_tests: libulvt_gpu.a
-finite_field_tests: third-party/Catch2/src/libCatch2Main.a
+finite_field_tests: third-party/Catch2/src/libCatch2Main.so.3.5.0
 finite_field_tests: libunrolled.a
-finite_field_tests: third-party/Catch2/src/libCatch2.a
+finite_field_tests: third-party/Catch2/src/libCatch2.so.3.5.0
 finite_field_tests: CMakeFiles/finite_field_tests.dir/cmake_device_link.o
 finite_field_tests: CMakeFiles/finite_field_tests.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/intern-04/binius-gpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable finite_field_tests"

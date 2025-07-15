@@ -210,6 +210,8 @@ CMakeFiles/sumcheck_test.dir/src/ulvt/sumcheck/test/test.cu.o
  /home/intern-04/binius-gpu/src/ulvt/sumcheck/test/test.cu
  /home/intern-04/binius-gpu/build/third-party/Catch2/generated-includes/catch2/catch_user_config.hpp
  /home/intern-04/binius-gpu/src/ulvt/utils/bitslicing.cuh
+ /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cuh
+ /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled.cuh
  /home/intern-04/binius-gpu/src/ulvt/sumcheck/utils/constants.hpp
  /home/intern-04/binius-gpu/src/ulvt/sumcheck/core/core.cuh
  /home/intern-04/binius-gpu/src/ulvt/sumcheck/core/kernels.cuh

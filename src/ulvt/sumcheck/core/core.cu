@@ -7,27 +7,6 @@
 #include "../utils/constants.hpp"
 #include "core.cuh"
 
-__host__ __device__ void evaluate_composition_on_batch_row_gpu( // after folding, calculate the claimed sum over hypercube by multiplying the individual multilinear evaluations
-	const uint32_t* first_batch_of_row,
-	uint32_t* batch_composition_destination,
-	const uint32_t composition_size,
-	const uint32_t original_evals_per_col
-) {
-	memcpy(batch_composition_destination, first_batch_of_row, BITS_WIDTH * sizeof(uint32_t));
-
-	for (int operand_in_composition = 1; operand_in_composition < composition_size; ++operand_in_composition) {
-		// next polynomial in the composition
-		// makes sense because the INTS_PER_VALUE still represents the size of all the batches
-		const uint32_t* nth_batch_of_row =
-			first_batch_of_row + operand_in_composition * original_evals_per_col * INTS_PER_VALUE; // move forward to the next polynomial in the composition
-		
-		// multiply
-		//multiply_unrolled<TOWER_HEIGHT>(batch_composition_destination, nth_batch_of_row, batch_composition_destination);
-		//multiply_unrolled_kernel<<<1, 1>>>(batch_composition_destination, nth_batch_of_row, batch_composition_destination);	
-		multiply_hybrid_kernel<<<1, 128>>>(batch_composition_destination, nth_batch_of_row, batch_composition_destination, 1 << TOWER_HEIGHT);
-		//cudaDeviceSynchronize();
-	}
-}
 
 __host__ __device__ void evaluate_composition_on_batch_row( // after folding, calculate the claimed sum over hypercube by multiplying the individual multilinear evaluations
 	const uint32_t* first_batch_of_row,

@@ -3,6 +3,8 @@
 
 CMakeFiles/sumcheck_bench.dir/src/ulvt/sumcheck/bench/benchmark.cu.o: /home/intern-04/binius-gpu/src/ulvt/sumcheck/bench/benchmark.cu \
   /home/intern-04/binius-gpu/src/ulvt/utils/bitslicing.cuh \
+  /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cuh \
+  /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled.cuh \
   /home/intern-04/binius-gpu/src/ulvt/sumcheck/utils/constants.hpp \
   /home/intern-04/binius-gpu/src/ulvt/sumcheck/core/core.cuh \
   /home/intern-04/binius-gpu/src/ulvt/sumcheck/core/kernels.cuh \
@@ -386,8 +388,6 @@ CMakeFiles/sumcheck_bench.dir/src/ulvt/sumcheck/bench/benchmark.cu.o: /home/inte
 
 /usr/include/x86_64-linux-gnu/c++/12/bits/gthr.h:
 
-/usr/include/x86_64-linux-gnu/c++/12/bits/gthr-default.h:
-
 /usr/include/x86_64-linux-gnu/c++/12/bits/error_constants.h:
 
 /usr/include/x86_64-linux-gnu/c++/12/bits/ctype_inline.h:
@@ -496,11 +496,9 @@ CMakeFiles/sumcheck_bench.dir/src/ulvt/sumcheck/bench/benchmark.cu.o: /home/inte
 
 /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
 
-/usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
+/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
 
-/usr/include/c++/12/chrono:
-
-/usr/include/c++/12/cerrno:
+/usr/include/x86_64-linux-gnu/bits/fp-logb.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/FILE.h:
 
@@ -528,10 +526,6 @@ CMakeFiles/sumcheck_bench.dir/src/ulvt/sumcheck/bench/benchmark.cu.o: /home/inte
 
 /usr/include/c++/12/bits/invoke.h:
 
-/usr/include/c++/12/bits/ranges_base.h:
-
-/usr/include/c++/12/bits/range_access.h:
-
 /usr/include/c++/12/cmath:
 
 /usr/local/cuda-12.6/targets/x86_64-linux/include/sm_20_atomic_functions.h:
@@ -543,6 +537,8 @@ CMakeFiles/sumcheck_bench.dir/src/ulvt/sumcheck/bench/benchmark.cu.o: /home/inte
 /usr/include/c++/12/istream:
 
 /usr/include/c++/12/bits/nested_exception.h:
+
+/home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cuh:
 
 /usr/local/cuda-12.6/targets/x86_64-linux/include/cuda_runtime_api.h:
 
@@ -566,9 +562,15 @@ CMakeFiles/sumcheck_bench.dir/src/ulvt/sumcheck/bench/benchmark.cu.o: /home/inte
 
 /usr/include/c++/12/bits/string_view.tcc:
 
-/usr/include/c++/12/bits/stl_uninitialized.h:
+/usr/include/c++/12/bits/predefined_ops.h:
 
-/usr/include/c++/12/bits/charconv.h:
+/usr/include/c++/12/bits/locale_classes.h:
+
+/usr/local/cuda-12.6/targets/x86_64-linux/include/sm_35_intrinsics.h:
+
+/usr/include/c++/12/new:
+
+/usr/include/c++/12/bits/iterator_concepts.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdio2.h:
 
@@ -602,29 +604,29 @@ CMakeFiles/sumcheck_bench.dir/src/ulvt/sumcheck/bench/benchmark.cu.o: /home/inte
 
 /usr/include/c++/12/bits/localefwd.h:
 
-/usr/include/c++/12/bits/stl_iterator_base_funcs.h:
-
-/home/intern-04/binius-gpu/src/ulvt/utils/bitslicing.cuh:
-
-/usr/include/c++/12/bits/stl_bvector.h:
-
-/usr/include/c++/12/bits/basic_ios.h:
+/usr/include/c++/12/bits/stringfwd.h:
 
 /usr/include/c++/12/clocale:
 
 /usr/include/c++/12/bits/move.h:
 
-/usr/include/linux/limits.h:
+/usr/include/c++/12/bits/stl_bvector.h:
 
-/usr/include/c++/12/bits/alloc_traits.h:
+/usr/include/c++/12/bits/basic_ios.h:
+
+/usr/include/c++/12/backward/binders.h:
+
+/usr/include/x86_64-linux-gnu/bits/wordsize.h:
+
+/usr/include/string.h:
+
+/usr/include/c++/12/bits/functional_hash.h:
+
+/usr/include/c++/12/bits/chrono.h:
 
 /usr/include/c++/12/bits/memoryfwd.h:
 
 /usr/include/c++/12/bits/basic_ios.tcc:
-
-/usr/include/c++/12/bits/stl_iterator_base_types.h:
-
-/usr/include/c++/12/bits/stl_iterator.h:
 
 /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
 
@@ -638,23 +640,53 @@ CMakeFiles/sumcheck_bench.dir/src/ulvt/sumcheck/bench/benchmark.cu.o: /home/inte
 
 /usr/include/c++/12/bits/functexcept.h:
 
+/usr/include/x86_64-linux-gnu/c++/12/bits/gthr-default.h:
+
+/home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled.cuh:
+
 /usr/include/c++/12/bits/exception.h:
 
 /usr/include/c++/12/bits/exception_ptr.h:
 
-/usr/include/c++/12/bits/functional_hash.h:
+/usr/include/c++/12/bits/stl_iterator_base_funcs.h:
 
-/usr/include/c++/12/bits/stringfwd.h:
+/home/intern-04/binius-gpu/src/ulvt/utils/bitslicing.cuh:
 
-/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
+/usr/include/c++/12/bits/stl_iterator.h:
 
-/usr/include/c++/12/backward/binders.h:
+/usr/include/c++/12/bits/stl_iterator_base_types.h:
 
-/usr/include/x86_64-linux-gnu/bits/wordsize.h:
+/usr/include/linux/limits.h:
 
-/usr/include/string.h:
+/usr/include/c++/12/bits/alloc_traits.h:
 
-/usr/include/c++/12/bits/chrono.h:
+/usr/include/assert.h:
+
+/home/intern-04/binius-gpu/src/ulvt/sumcheck/sumcheck.cuh:
+
+/usr/local/cuda-12.6/targets/x86_64-linux/include/vector_functions.hpp:
+
+/usr/include/c++/12/tr1/exp_integral.tcc:
+
+/usr/include/c++/12/bits/range_access.h:
+
+/usr/include/c++/12/bits/ranges_base.h:
+
+/usr/include/c++/12/bits/locale_facets.h:
+
+/usr/include/c++/12/bits/streambuf_iterator.h:
+
+/home/intern-04/binius-gpu/src/ulvt/sumcheck/core/core.cuh:
+
+/usr/include/c++/12/bits/ranges_cmp.h:
+
+/usr/include/c++/12/bits/char_traits.h:
+
+/usr/include/alloca.h:
+
+/usr/include/c++/12/bits/stl_uninitialized.h:
+
+/usr/include/c++/12/bits/charconv.h:
 
 /usr/include/c++/12/bits/stl_vector.h:
 
@@ -667,26 +699,6 @@ CMakeFiles/sumcheck_bench.dir/src/ulvt/sumcheck/bench/benchmark.cu.o: /home/inte
 /usr/include/c++/12/bits/basic_string.h:
 
 /usr/include/c++/12/sstream:
-
-/usr/include/c++/12/bits/locale_facets.h:
-
-/home/intern-04/binius-gpu/src/ulvt/sumcheck/core/core.cuh:
-
-/usr/include/c++/12/bits/streambuf_iterator.h:
-
-/usr/include/assert.h:
-
-/home/intern-04/binius-gpu/src/ulvt/sumcheck/sumcheck.cuh:
-
-/usr/include/c++/12/bits/ranges_cmp.h:
-
-/usr/include/alloca.h:
-
-/usr/include/c++/12/bits/char_traits.h:
-
-/usr/local/cuda-12.6/targets/x86_64-linux/include/vector_functions.hpp:
-
-/usr/include/c++/12/tr1/exp_integral.tcc:
 
 /usr/local/cuda-12.6/targets/x86_64-linux/include/texture_indirect_functions.h:
 
@@ -754,15 +766,11 @@ CMakeFiles/sumcheck_bench.dir/src/ulvt/sumcheck/bench/benchmark.cu.o: /home/inte
 
 /usr/include/x86_64-linux-gnu/asm/errno.h:
 
-/usr/include/c++/12/bits/iterator_concepts.h:
+/usr/include/c++/12/cerrno:
 
-/usr/include/c++/12/bits/predefined_ops.h:
+/usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
 
-/usr/include/c++/12/bits/locale_classes.h:
-
-/usr/local/cuda-12.6/targets/x86_64-linux/include/sm_35_intrinsics.h:
-
-/usr/include/c++/12/new:
+/usr/include/c++/12/chrono:
 
 /usr/include/c++/12/concepts:
 
@@ -863,8 +871,6 @@ CMakeFiles/sumcheck_bench.dir/src/ulvt/sumcheck/bench/benchmark.cu.o: /home/inte
 /usr/include/c++/12/initializer_list:
 
 /usr/include/c++/12/typeinfo:
-
-/usr/include/x86_64-linux-gnu/bits/fp-logb.h:
 
 /usr/include/x86_64-linux-gnu/bits/wchar2.h:
 

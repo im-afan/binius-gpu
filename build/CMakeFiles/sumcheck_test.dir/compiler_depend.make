@@ -208,6 +208,8 @@ CMakeFiles/sumcheck_test.dir/src/ulvt/sumcheck/test/kernel/verifier_kernel.cu.o:
 CMakeFiles/sumcheck_test.dir/src/ulvt/sumcheck/test/test.cu.o: /home/intern-04/binius-gpu/src/ulvt/sumcheck/test/test.cu \
   third-party/Catch2/generated-includes/catch2/catch_user_config.hpp \
   /home/intern-04/binius-gpu/src/ulvt/utils/bitslicing.cuh \
+  /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cuh \
+  /home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled.cuh \
   /home/intern-04/binius-gpu/src/ulvt/sumcheck/utils/constants.hpp \
   /home/intern-04/binius-gpu/src/ulvt/sumcheck/core/core.cuh \
   /home/intern-04/binius-gpu/src/ulvt/sumcheck/core/kernels.cuh \
@@ -2004,8 +2006,6 @@ CMakeFiles/sumcheck_test.dir/src/ulvt/sumcheck/test/verifier.cu.o: /home/intern-
 
 /usr/local/cuda-12.6/targets/x86_64-linux/include/cuda/std/__utility/exchange.h:
 
-/usr/local/cuda-12.6/targets/x86_64-linux/include/cuda/std/__utility/declval.h:
-
 /usr/local/cuda-12.6/targets/x86_64-linux/include/cuda/std/__utility/convert_to_integral.h:
 
 /usr/local/cuda-12.6/targets/x86_64-linux/include/cuda/std/__utility/as_const.h:
@@ -2870,10 +2870,6 @@ third-party/Catch2/generated-includes/catch2/catch_user_config.hpp:
 
 /usr/include/stdint.h:
 
-/usr/local/cuda-12.6/targets/x86_64-linux/include/cuda/std/__type_traits/is_nothrow_default_constructible.h:
-
-/usr/include/strings.h:
-
 /usr/include/x86_64-linux-gnu/bits/byteswap.h:
 
 /home/intern-04/binius-gpu/third-party/Catch2/src/catch2/internal/catch_stringref.hpp:
@@ -2958,6 +2954,10 @@ third-party/Catch2/generated-includes/catch2/catch_user_config.hpp:
 
 /usr/local/cuda-12.6/targets/x86_64-linux/include/sm_61_intrinsics.hpp:
 
+/usr/include/x86_64-linux-gnu/asm/errno.h:
+
+/home/intern-04/binius-gpu/third-party/Catch2/src/catch2/internal/catch_preprocessor_internal_stringify.hpp:
+
 /usr/include/c++/12/tr1/exp_integral.tcc:
 
 /usr/local/cuda-12.6/targets/x86_64-linux/include/surface_indirect_functions.h:
@@ -2993,6 +2993,18 @@ third-party/Catch2/generated-includes/catch2/catch_user_config.hpp:
 /usr/local/cuda-12.6/targets/x86_64-linux/include/sm_35_intrinsics.h:
 
 /home/intern-04/binius-gpu/src/ulvt/sumcheck/test/test.cu:
+
+/usr/local/cuda-12.6/targets/x86_64-linux/include/cuda/std/__utility/declval.h:
+
+/home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_rolled.cuh:
+
+/home/intern-04/binius-gpu/third-party/Catch2/src/catch2/internal/catch_compiler_capabilities.hpp:
+
+/usr/local/cuda-12.6/targets/x86_64-linux/include/cuda/std/__type_traits/is_nothrow_default_constructible.h:
+
+/usr/include/strings.h:
+
+/home/intern-04/binius-gpu/src/ulvt/finite_fields/circuit_generator/unrolled/binary_tower_unrolled.cuh:
 
 /home/intern-04/binius-gpu/src/ulvt/sumcheck/core/core.cuh:
 
@@ -3045,8 +3057,6 @@ third-party/Catch2/generated-includes/catch2/catch_user_config.hpp:
 /usr/include/c++/12/tr1/gamma.tcc:
 
 /home/intern-04/binius-gpu/third-party/Catch2/src/catch2/internal/catch_compare_traits.hpp:
-
-/home/intern-04/binius-gpu/third-party/Catch2/src/catch2/internal/catch_compiler_capabilities.hpp:
 
 /usr/local/cuda-12.6/targets/x86_64-linux/include/cuda/std/__type_traits/is_nothrow_move_constructible.h:
 
@@ -3255,7 +3265,3 @@ third-party/Catch2/generated-includes/catch2/catch_user_config.hpp:
 /home/intern-04/binius-gpu/third-party/Catch2/src/catch2/interfaces/catch_interfaces_test_invoker.hpp:
 
 /usr/include/wchar.h:
-
-/home/intern-04/binius-gpu/third-party/Catch2/src/catch2/internal/catch_preprocessor_internal_stringify.hpp:
-
-/usr/include/x86_64-linux-gnu/asm/errno.h:

@@ -306,4 +306,6 @@ CMakeFiles/sumcheck_bench.dir/src/ulvt/sumcheck/bench/benchmark.cu.o : /home/int
     /usr/include/c++/12/cstring \
     /home/intern-04/binius-gpu/src/ulvt/sumcheck/bench/../core/core.cuh \
     /home/intern-04/binius-gpu/src/ulvt/sumcheck/bench/../core/../utils/constants.hpp \
-    /home/intern-04/binius-gpu/src/ulvt/sumcheck/bench/../core/kernels.cuh
+    /home/intern-04/binius-gpu/src/ulvt/sumcheck/bench/../core/kernels.cuh \
+    /home/intern-04/binius-gpu/src/ulvt/sumcheck/bench/../core/../../finite_fields/circuit_generator/unrolled/binary_tower_rolled.cuh \
+    /home/intern-04/binius-gpu/src/ulvt/sumcheck/bench/../core/../../finite_fields/circuit_generator/unrolled/binary_tower_unrolled.cuh

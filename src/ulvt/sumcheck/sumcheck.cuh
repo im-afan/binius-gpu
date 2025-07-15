@@ -212,7 +212,7 @@ public:
 
 			cudaMemset(gpu_folded_products_sums, 0, INTERPOLATION_POINTS * BITS_WIDTH * sizeof(uint32_t));
 
-			compute_compositions<INTERPOLATION_POINTS, COMPOSITION_SIZE, EVALS_PER_MULTILINEAR>
+			/*compute_compositions<INTERPOLATION_POINTS, COMPOSITION_SIZE, EVALS_PER_MULTILINEAR>
 				<<<BLOCKS, THREADS_PER_BLOCK>>>(
 					gpu_multilinear_evaluations,
 					gpu_multilinear_products,
@@ -221,7 +221,14 @@ public:
 					num_batches_per_multilinear,
 					active_threads,
 					active_threads_folded
-				);
+				);*/
+			compute_compositions_fine<INTERPOLATION_POINTS, COMPOSITION_SIZE, EVALS_PER_MULTILINEAR>(
+				gpu_multilinear_evaluations,
+				gpu_multilinear_products,
+				gpu_folded_products_sums,
+				gpu_coefficients,
+				num_batches_per_multilinear
+			);
 
 			cudaDeviceSynchronize();
 

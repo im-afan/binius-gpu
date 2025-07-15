@@ -1,6 +1,105 @@
+#pragma once
+
 #include <cstdint>
 
 #include "../utils/constants.hpp"
+#include "../../finite_fields/circuit_generator/unrolled/binary_tower_rolled.cuh"
+#include "../../finite_fields/circuit_generator/unrolled/binary_tower_unrolled.cuh"
+
+#ifndef CUDA_CHECK
+#define CUDA_CHECK
+#define check(ans) { gpuAssert((ans), __FILE__, __LINE__); }
+inline void gpuAssert(cudaError_t code, const char *file, int line, bool abort=true)
+{
+   if (code != cudaSuccess) 
+   {
+      fprintf(stderr,"GPUassert: %s %s %d\n", cudaGetErrorString(code), file, line);
+      if (abort) exit(code);
+   }
+}
+#endif
+
+__global__ void multiply_hybrid_kernel(const uint32_t* field_element_a, const uint32_t* field_element_b, uint32_t* destination, uint32_t num_bits) {
+    multiply_thread(field_element_a, field_element_b, destination, num_bits, threadIdx.x, blockIdx.x);
+}
+
+__global__ void multiply_then_add_kernel(const uint32_t* field_element_a, const uint32_t* field_element_b, uint32_t* destination, uint32_t num_bits) {
+    __shared__ uint32_t batch_product[128];
+    multiply_thread(field_element_a, field_element_b, batch_product, num_bits, threadIdx.x, blockIdx.x);
+	__syncthreads();
+    atomicXor(destination + threadIdx.x, batch_product[threadIdx.x]);
+}
+
+__global__ void composition_then_add_kernel(const uint32_t* field_elements, uint32_t* destination, uint32_t num_bits, uint32_t composition_size) {
+    uint32_t tid = threadIdx.x;
+	uint32_t bid = blockIdx.x;
+    uint32_t num_elements = gridDim.x;
+
+    __shared__ uint32_t batch_product[128];
+	batch_product[tid] = field_elements[bid * num_bits + tid];
+	__syncthreads();
+
+    for(int i = 1; i < composition_size; i++) {
+		//printf("multiply_thread field_eleemnts + %d, num_bits=%d, tid=%d\n", i*num_elements*num_bits + bid*num_bits, num_bits, tid);
+        multiply_thread(batch_product, field_elements + i*num_elements*num_bits + bid*num_bits, batch_product, num_bits, tid, 0);
+		__syncthreads();
+    }
+    atomicXor(destination + tid, batch_product[tid]);
+}
+
+__global__ void interpolation_then_composition_then_add(const uint32_t* batches, const uint32_t* coefficient, uint32_t* destination, uint32_t num_bits, uint32_t num_batches, uint32_t composition_size) { // calculate si(xi)
+    uint32_t tid = threadIdx.x;
+	uint32_t idx = tid + blockIdx.x * blockDim.x;// 127 + 128 * num_batch_rows / 2
+    
+    __shared__ uint32_t xor_of_halves[128];
+	__shared__ uint32_t folded_points[128];
+	__shared__ uint32_t composition[128];
+
+	for(int j = 0; j < composition_size; j++) {
+		const uint32_t* lower_batches = batches + j * num_batches * BITS_WIDTH;
+		const uint32_t* upper_batches = lower_batches + num_batches * BITS_WIDTH / 2;
+
+		xor_of_halves[tid] = lower_batches[idx] ^ upper_batches[idx];	
+		folded_points[tid] = 0;
+
+		__syncthreads();
+		if(tid * INTERPOLATION_TOWER_HEIGHT < num_bits) {
+			int i = tid * INTERPOLATION_TOWER_HEIGHT;
+			multiply_unrolled<INTERPOLATION_TOWER_HEIGHT>(xor_of_halves + i, coefficient, folded_points + i);
+		}
+		__syncthreads();
+		folded_points[tid] = folded_points[tid] ^ lower_batches[idx];
+		__syncthreads();
+		if(j == 0) {
+			multiply_thread(composition, folded_points, composition, num_bits, tid, 0);
+		} else {
+			composition[tid] = folded_points[tid];
+		}
+		__syncthreads();
+	}
+
+	atomicXor(destination + tid, composition[tid]);
+}
+
+template <uint32_t INTERPOLATION_POINTS, uint32_t COMPOSITION_SIZE, uint32_t EVALS_PER_MULTILINEAR>
+__host__ void compute_compositions_fine( // evaluates Si(Xi) at multiple points and gets the claimed sum
+	const uint32_t* multilinear_evaluations, // d x 2^n table representing the 3 multiplied hypercubes
+	uint32_t* multilinear_products_sums, 
+	uint32_t* folded_products_sums,
+	const uint32_t coefficients[INTERPOLATION_POINTS * BITS_WIDTH],
+	const uint32_t num_batch_rows
+) {
+	composition_then_add_kernel<<<num_batch_rows, BITS_WIDTH>>>(multilinear_evaluations, multilinear_products_sums, BITS_WIDTH, COMPOSITION_SIZE);	
+	for(int i = 0; i < INTERPOLATION_POINTS; i++) {
+		const uint32_t* coefficient = coefficients + BITS_WIDTH * i;
+		uint32_t* destination = folded_products_sums + BITS_WIDTH * i;
+
+		interpolation_then_composition_then_add
+			<<<num_batch_rows / 2, BITS_WIDTH>>>(multilinear_evaluations, coefficient, destination, BITS_WIDTH, num_batch_rows, COMPOSITION_SIZE);	
+	}
+	
+	check(cudaDeviceSynchronize());
+}
 
 template <uint32_t INTERPOLATION_POINTS, uint32_t COMPOSITION_SIZE, uint32_t EVALS_PER_MULTILINEAR>
 __global__ void compute_compositions( // evaluates Si(Xi) at multiple points and gets the claimed sum

@@ -350,5 +350,7 @@ CMakeFiles/sumcheck_test.dir/src/ulvt/sumcheck/test/test.cu.o : /home/intern-04/
     /home/intern-04/binius-gpu/src/ulvt/sumcheck/test/../core/core.cuh \
     /home/intern-04/binius-gpu/src/ulvt/sumcheck/test/../core/../utils/constants.hpp \
     /home/intern-04/binius-gpu/src/ulvt/sumcheck/test/../core/kernels.cuh \
+    /home/intern-04/binius-gpu/src/ulvt/sumcheck/test/../core/../../finite_fields/circuit_generator/unrolled/binary_tower_rolled.cuh \
+    /home/intern-04/binius-gpu/src/ulvt/sumcheck/test/../core/../../finite_fields/circuit_generator/unrolled/binary_tower_unrolled.cuh \
     /home/intern-04/binius-gpu/src/ulvt/sumcheck/test/./verifier.cuh \
     /home/intern-04/binius-gpu/src/ulvt/sumcheck/test/utils/bigints.cuh

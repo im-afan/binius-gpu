@@ -6,7 +6,7 @@
 #include "../core/kernels.cuh"
 #include "../core/core.cuh"
 
-TEST_CASE("composition_then_add_kernel") {
+void test_composition_then_add_kernel() {
     uint32_t x[128*4];// = malloc(128 * 4 * sizeof(uint32_t));
     uint32_t solution[128];// = malloc(128 * sizeof(uint32_t)); 
     uint32_t output[128];// = malloc(128 * sizeof(uint32_t)); 
@@ -53,7 +53,15 @@ TEST_CASE("composition_then_add_kernel") {
     }
 }
 
-TEST_CASE("interpolation_then_composition_then_add_kernel") {
+TEST_CASE("composition_then_add_kernel") {
+    test_composition_then_add_kernel();
+    test_composition_then_add_kernel();
+    test_composition_then_add_kernel();
+    test_composition_then_add_kernel();
+    test_composition_then_add_kernel();
+}
+
+void test_interpolation_then_composition_then_add() {
     uint32_t x[128*4];// = malloc(128 * 4 * sizeof(uint32_t));
     uint32_t coefficient[128];
     uint32_t solution[128];// = malloc(128 * sizeof(uint32_t)); 
@@ -99,4 +107,14 @@ TEST_CASE("interpolation_then_composition_then_add_kernel") {
     for(int i = 0; i < 128; i++) {
         REQUIRE(output[i] == solution[i]);
     }
+
+}
+
+TEST_CASE("interpolation_then_composition_then_add_kernel") {
+    test_interpolation_then_composition_then_add(); 
+    test_interpolation_then_composition_then_add(); 
+    test_interpolation_then_composition_then_add(); 
+    test_interpolation_then_composition_then_add(); 
+    test_interpolation_then_composition_then_add(); 
+    test_interpolation_then_composition_then_add(); 
 }

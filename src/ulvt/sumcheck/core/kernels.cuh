@@ -24,7 +24,7 @@ __global__ void multiply_hybrid_kernel(const uint32_t* field_element_a, const ui
 }
 
 __global__ void multiply_then_add_kernel(const uint32_t* field_element_a, const uint32_t* field_element_b, uint32_t* destination, uint32_t num_bits) {
-    __shared__ uint32_t batch_product[128];
+    __shared__ uint32_t batch_product[BITS_WIDTH];
     multiply_thread(field_element_a, field_element_b, batch_product, num_bits, threadIdx.x, blockIdx.x);
 	__syncthreads();
     atomicXor(destination + threadIdx.x, batch_product[threadIdx.x]);
@@ -35,11 +35,20 @@ __global__ void composition_then_add_kernel(const uint32_t* field_elements, uint
 	uint32_t bid = blockIdx.x;
     uint32_t num_elements = gridDim.x;
 
-    __shared__ uint32_t batch_product[128];
+	if(bid == 0) {
+		destination[tid] = 0;
+	}
+	
+    __shared__ uint32_t batch_product[BITS_WIDTH];
+	batch_product[tid] = 0;
+	__syncthreads();
 	batch_product[tid] = field_elements[bid * num_bits + tid];
 	__syncthreads();
 
 	//printf("%d\n", field_elements[bid * num_bits + tid]);
+	if(tid == 0 && bid == 0) {
+		printf("multilinear_evaluations[0] = %u\n", field_elements[0]);
+	}
 
     for(int i = 1; i < composition_size; i++) {
 		//printf("multiply_thread field_eleemnts + %d, num_bits=%d, tid=%d\n", i*num_elements*num_bits + bid*num_bits, num_bits, tid);
@@ -54,14 +63,29 @@ __global__ void interpolation_then_composition_then_add(const uint32_t* batches,
     uint32_t tid = threadIdx.x;
 	uint32_t idx = tid + blockIdx.x * blockDim.x;// 127 + 128 * num_batch_rows / 2
     
-    __shared__ uint32_t xor_of_halves[128];
-	__shared__ uint32_t folded_points[128];
-	__shared__ uint32_t composition[128];
+    __shared__ uint32_t xor_of_halves[BITS_WIDTH];
+	__shared__ uint32_t folded_points[BITS_WIDTH];
+	__shared__ uint32_t composition[BITS_WIDTH];
+
+	composition[tid] = 0;
+	xor_of_halves[tid] = 0;
+	folded_points[tid] = 0;
+
+	if(blockIdx.x == 0) {
+		destination[tid] = 0;
+	}
+
+	__syncthreads();
+	//composition[tid] = 0xFFFFFFFF;
 
 	for(int j = 0; j < composition_size; j++) {
-		const uint32_t* lower_batches = batches + j * num_batches * 128;
+		/*if(idx == 0) {
+			printf("fine coef[0] = %u\n", coefficient[0]);
+		}*/
+		const uint32_t* lower_batches = batches + j * num_batches * BITS_WIDTH;
 		
-		xor_of_halves[tid] = lower_batches[idx] ^ lower_batches[idx + num_batches * 128 / 2];
+		//xor_of_halves[tid] = lower_batches[idx] ^ lower_batches[idx + num_batches * BITS_WIDTH / 2];
+		xor_of_halves[tid] = batches[idx + j*num_batches*BITS_WIDTH] ^ batches[idx + j*num_batches*BITS_WIDTH + num_batches*BITS_WIDTH/2];
 		folded_points[tid] = 0;
 
 		__syncthreads();
@@ -80,21 +104,25 @@ __global__ void interpolation_then_composition_then_add(const uint32_t* batches,
 		}
 		__syncthreads();
 	}
-
+	
 	atomicXor(destination + tid, composition[tid]);
 }
 
 template <uint32_t INTERPOLATION_POINTS, uint32_t COMPOSITION_SIZE, uint32_t EVALS_PER_MULTILINEAR>
-__host__ void compute_compositions_fine( // evaluates Si(Xi) at multiple points and gets the claimed sum
+void compute_compositions_fine( // evaluates Si(Xi) at multiple points and gets the claimed sum
 	const uint32_t* multilinear_evaluations, // d x 2^n table representing the 3 multiplied hypercubes
 	uint32_t* multilinear_products_sums, 
 	uint32_t* folded_products_sums,
 	const uint32_t coefficients[INTERPOLATION_POINTS * BITS_WIDTH],
-	const uint32_t num_batch_rows
+	const uint32_t num_batch_rows,
+	const cudaStream_t streams[INTERPOLATION_POINTS + 1]
 ) {
-	printf("compute_compositions_fine num_batch_rows=%d\n", num_batch_rows);
+
+	cudaMemset(multilinear_products_sums, 0, BITS_WIDTH * sizeof(uint32_t));
+	cudaMemset(folded_products_sums, 0, INTERPOLATION_POINTS * BITS_WIDTH * sizeof(uint32_t));
+
+	//printf("launch %d blocks of %d threads", num_batch_rows, BITS_WIDTH);
 	composition_then_add_kernel<<<num_batch_rows, BITS_WIDTH>>>(multilinear_evaluations, multilinear_products_sums, BITS_WIDTH, COMPOSITION_SIZE);	
-	check(cudaDeviceSynchronize());
 
 	for(int i = 0; i < INTERPOLATION_POINTS; i++) {
 		const uint32_t* coefficient = coefficients + BITS_WIDTH * i;
@@ -102,9 +130,9 @@ __host__ void compute_compositions_fine( // evaluates Si(Xi) at multiple points 
 
 		interpolation_then_composition_then_add
 			<<<num_batch_rows / 2, BITS_WIDTH>>>(multilinear_evaluations, coefficient, destination, BITS_WIDTH, num_batch_rows, COMPOSITION_SIZE);	
-		check(cudaDeviceSynchronize());
 	}
-	
+
+	check(cudaDeviceSynchronize());
 }
 
 template <uint32_t INTERPOLATION_POINTS, uint32_t COMPOSITION_SIZE, uint32_t EVALS_PER_MULTILINEAR>
@@ -143,6 +171,15 @@ __global__ void compute_compositions( // evaluates Si(Xi) at multiple points and
 	memset(folded_products_sums_this_thread, 0, INTERPOLATION_POINTS * BITS_WIDTH * sizeof(uint32_t));
 
 	memset(multilinear_products_sums_this_thread, 0, BITS_WIDTH * sizeof(uint32_t));
+
+	//if(tid == 0) {
+		//printf("regular multilinear_evaluations[%d] = %u\n", 0, multilinear_evaluations[0]);
+		//printf("compute_compositions_fine num_batch_rows=%d coef[0] = %u\n", num_batch_rows, coefficients[0]);
+	//}
+
+	if(tid == 0) {
+		printf("regular multilinear_evaluations[0] = %u\n", multilinear_evaluations[0]);
+	}
 
 	for (uint32_t row_idx = tid; row_idx < num_batch_rows; row_idx += gridDim.x * blockDim.x) {
 		uint32_t this_multilinear_product[BITS_WIDTH];
@@ -185,6 +222,9 @@ __global__ void compute_compositions( // evaluates Si(Xi) at multiple points and
 				// for each interpolation point and multilinear polynomial, fold the upper batch with the lower batch to find Si(Xi) where Xi is the ith interpolation point
 				// and save the fold result to folded_batch_row
 				for (int interpolation_point = 0; interpolation_point < INTERPOLATION_POINTS; ++interpolation_point) {
+					/*if(tid == 0) {
+						printf("reg coef[0] = %u\n", *(coefficients + BITS_WIDTH * interpolation_point));
+					}*/
 					fold_batch( // 3%
 						lower_batch,
 						upper_batch,

@@ -7,9 +7,11 @@
 #include "core/kernels.cuh"
 #include "utils/constants.hpp"
 
+#define USE_FINE_KERNEL true 
+
 template <uint32_t NUM_VARS, uint32_t COMPOSITION_SIZE, bool DATA_IS_TRANSPOSED>
 class Sumcheck {
-	static_assert(NUM_VARS == 20 || NUM_VARS == 24 || NUM_VARS == 28, "NUM_VARS must be 20, 24, or 28");
+	//static_assert(NUM_VARS == 20 || NUM_VARS == 24 || NUM_VARS == 28, "NUM_VARS must be 20, 24, or 28");
 	static_assert(
 		COMPOSITION_SIZE == 2 || COMPOSITION_SIZE == 3 || COMPOSITION_SIZE == 4, "COMPOSITION_SIZE must be 2, 3, or 4"
 	);
@@ -27,6 +29,8 @@ private:
 	uint32_t *cpu_multilinear_evaluations, *gpu_multilinear_evaluations;
 
 	uint32_t *gpu_coefficients;
+
+	cudaStream_t streams[INTERPOLATION_POINTS + 1];
 
 	void fold_list_halves(
 		uint32_t *source,
@@ -112,7 +116,10 @@ public:
 			BitsliceUtils<BITS_WIDTH>::repeat_value_bitsliced(
 				coefficients + interpolation_point * BITS_WIDTH, coefficient_as_value
 			);
+
+			cudaStreamCreate(&streams[interpolation_point]);
 		}
+		cudaStreamCreate(&streams[INTERPOLATION_POINTS]);
 
 		cudaMalloc(&gpu_coefficients, BITS_WIDTH * INTERPOLATION_POINTS * sizeof(uint32_t));
 
@@ -129,7 +136,12 @@ public:
 		cudaMalloc(&folded_batch_row_global, 5 * 4 * BITS_WIDTH * BLOCKS * THREADS_PER_BLOCK);*/
 	}
 
-	~Sumcheck() { delete[] cpu_multilinear_evaluations; }
+	~Sumcheck() { 
+		delete[] cpu_multilinear_evaluations; 
+		for(int i = 0; i <= INTERPOLATION_POINTS; i++) {
+			cudaStreamDestroy(streams[i]);
+		}
+	}
 
 	void this_round_messages(
 		std::array<uint32_t, INTS_PER_VALUE> &sum_span,
@@ -208,17 +220,12 @@ public:
 			uint32_t* correct_gpu_folded_products_sums;
 
 			cudaMalloc(&gpu_multilinear_products, BITS_WIDTH * sizeof(uint32_t));
-
 			cudaMemset(gpu_multilinear_products, 0, BITS_WIDTH * sizeof(uint32_t));
-
 			cudaMalloc(&gpu_folded_products_sums, INTERPOLATION_POINTS * BITS_WIDTH * sizeof(uint32_t));
-
 			cudaMemset(gpu_folded_products_sums, 0, INTERPOLATION_POINTS * BITS_WIDTH * sizeof(uint32_t));
 			
 			cudaMalloc(&correct_gpu_folded_products_sums, INTERPOLATION_POINTS * BITS_WIDTH * sizeof(uint32_t));
-			
 			cudaMemset(correct_gpu_folded_products_sums, 0, INTERPOLATION_POINTS * BITS_WIDTH * sizeof(uint32_t));
-			
 			cudaMalloc(&correct_gpu_multilinear_products, BITS_WIDTH * sizeof(uint32_t));
 			cudaMemset(correct_gpu_multilinear_products, 0, BITS_WIDTH * sizeof(uint32_t));
 
@@ -232,19 +239,33 @@ public:
 					active_threads,
 					active_threads_folded
 				);
-			cudaDeviceSynchronize();
-			compute_compositions_fine<INTERPOLATION_POINTS, COMPOSITION_SIZE, EVALS_PER_MULTILINEAR>(
-				gpu_multilinear_evaluations,
-				gpu_multilinear_products,
-				gpu_folded_products_sums,
-				gpu_coefficients,
-				num_batches_per_multilinear
-			);
+			check(cudaDeviceSynchronize());
+			if(false) {
+				compute_compositions<INTERPOLATION_POINTS, COMPOSITION_SIZE, EVALS_PER_MULTILINEAR>
+					<<<BLOCKS, THREADS_PER_BLOCK>>>(
+						gpu_multilinear_evaluations,
+						gpu_multilinear_products,
+						gpu_folded_products_sums,
+						gpu_coefficients,
+						num_batches_per_multilinear,
+						active_threads,
+						active_threads_folded);
+			} else {
+				compute_compositions_fine<INTERPOLATION_POINTS, COMPOSITION_SIZE, EVALS_PER_MULTILINEAR>(
+					gpu_multilinear_evaluations,
+					gpu_multilinear_products,
+					gpu_folded_products_sums,
+					gpu_coefficients,
+					num_batches_per_multilinear,
+					streams
+				);
+			}
+			check(cudaDeviceSynchronize());
 
-			uint32_t* cpu_correct_multilinear_products[BITS_WIDTH];
-			uint32_t* cpu_correct_folded_products_sums[INTERPOLATION_POINTS * BITS_WIDTH];
-			uint32_t* cpu_multilinear_products[BITS_WIDTH];
-			uint32_t* cpu_folded_products_sums[INTERPOLATION_POINTS * BITS_WIDTH];
+			uint32_t cpu_correct_multilinear_products[BITS_WIDTH];
+			uint32_t cpu_correct_folded_products_sums[INTERPOLATION_POINTS * BITS_WIDTH];
+			uint32_t cpu_multilinear_products[BITS_WIDTH];
+			uint32_t cpu_folded_products_sums[INTERPOLATION_POINTS * BITS_WIDTH];
 
 			cudaMemcpy(cpu_correct_multilinear_products, correct_gpu_multilinear_products, BITS_WIDTH * sizeof(uint32_t), cudaMemcpyDeviceToHost);
 			cudaMemcpy(cpu_correct_folded_products_sums, correct_gpu_folded_products_sums, INTERPOLATION_POINTS * BITS_WIDTH * sizeof(uint32_t), cudaMemcpyDeviceToHost);
@@ -253,8 +274,25 @@ public:
 
 			printf("correct gpu multilinear product %d, got %d\n", cpu_correct_multilinear_products[10], cpu_multilinear_products[10]);
 			printf("correct gpu interpolation product %d, got %d\n", cpu_correct_folded_products_sums[10], cpu_folded_products_sums[10]);
+			bool good = true;
+			for(int i = 0; i < BITS_WIDTH; i++) {
+				for(int j = 0; j < INTERPOLATION_POINTS; j++) {
+					if(cpu_correct_folded_products_sums[i + BITS_WIDTH*j] != cpu_folded_products_sums[i + BITS_WIDTH*j]) {
+						//if(round == 1) printf("%d folded products sum expected %u, got %u\n", i + BITS_WIDTH*j, cpu_correct_folded_products_sums[i + BITS_WIDTH*j], cpu_folded_products_sums[i + BITS_WIDTH*j]);
+						good = false;
+					}
+				}
+				if(cpu_correct_multilinear_products[i] != cpu_multilinear_products[i]) {
+					if(round == 1) printf("%d, multilnear products expected %u, got %u\n", i, cpu_correct_multilinear_products[i], cpu_multilinear_products[i]);
+					good = false;
+				}
+			}
+			if(good) 
+				printf("GOOD GOOD GOOD\n");
+			else
+				printf("BAD BAD BAD BAD\n");
 
-			cudaDeviceSynchronize();
+			//cudaDeviceSynchronize();
 
 			cudaMemcpy(
 				multilinear_products, gpu_multilinear_products, BITS_WIDTH * sizeof(uint32_t), cudaMemcpyDeviceToHost
